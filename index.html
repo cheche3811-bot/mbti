@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>16 型人格测试 · 找到真正的你</title>
+<meta name="description" content="48 题专业 MBTI 人格测试，七级量表精准计分，生成专属人格卡片，可分享朋友圈。">
+<meta name="keywords" content="MBTI,16型人格,人格测试,性格测试,INFJ,ENFP">
+<meta name="theme-color" content="#FFFBF4">
+
+<!-- 社交分享卡片（微信/QQ/微博/Twitter） -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="16 型人格测试 · 你到底是哪一型？">
+<meta property="og:description" content="48 题七级量表，比二选一更准。测完生成专属人格卡，看看你是稀有的哪一型。">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="16 型人格测试 · 你到底是哪一型？">
+<meta name="twitter:description" content="48 题七级量表，比二选一更准。测完生成专属人格卡。">
+
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧩</text></svg>">
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+<!-- 背景装饰 -->
+<div class="bg-deco">
+  <span class="blob b1"></span>
+  <span class="blob b2"></span>
+  <span class="blob b3"></span>
+  <span class="dots"></span>
+</div>
+
+<!-- ==================== 首页 ==================== -->
+<section class="screen active" id="screen-home">
+  <div class="home-wrap">
+    <div class="badge-top">✦ 48 题 · 七级量表 · 约 6 分钟 ✦</div>
+
+    <h1 class="hero-title">
+      <span class="line1">你到底是</span>
+      <span class="line2">哪 <em>16</em> 型人格？</span>
+    </h1>
+
+  <p class="hero-sub">不是随便点点的娱乐测试。<br>基于荣格认知功能理论，48 道七级量表精准计分。</p>
+
+    <div class="face-parade">
+      <span class="pf" style="--c:#9B7BEA">🦉</span>
+      <span class="pf" style="--c:#3FB98C">🦄</span>
+      <span class="pf" style="--c:#3F94D6">🐨</span>
+      <span class="pf" style="--c:#F2A63B">🐬</span>
+ <span class="pf" style="--c:#EA7BA8">🦊</span>
+    </div>
+
+    <button class="btn-main" id="btn-start">
+      开始测试 <span class="arrow">→</span>
+    </button>
+
+    <div class="home-stats">
+      <div class="hs"><b>48</b><i>道题目</i></div>
+    <div class="hs-line"></div>
+      <div class="hs"><b>5</b><i>个维度</i></div>
+      <div class="hs-line"></div>
+      <div class="hs"><b>16</b><i>种人格</i></div>
+    </div>
+
+    <div class="home-note">
+      <span>🔒</span> 全程本地计算，不上传任何数据
+    </div>
+  </div>
+</section>
+
+<!-- ==================== 答题页 ==================== -->
+<section class="screen" id="screen-quiz">
+  <header class="quiz-head">
+    <button class="icon-btn" id="btn-prev" title="上一题">←</button>
+    <div class="progress-box">
+      <div class="progress-track"><div class="progress-fill" id="prog-fill"></div></div>
+      <div class="progress-txt"><b id="q-now">1</b> / 48</div>
+    </div>
+    <div class="dim-tag" id="dim-tag">能量</div>
+  </header>
+
+  <div class="quiz-body">
+    <div class="q-card" id="q-card">
+      <div class="q-index" id="q-index">Q1</div>
+      <h2 class="q-text" id="q-text">加载中…</h2>
+    </div>
+
+    <div class="scale-wrap">
+      <div class="scale-label"><span class="sl-agree">同意</span><span class="sl-dis">反对</span></div>
+  <div class="scale" id="scale"></div>
+      <div class="scale-hint">选一个最接近你真实感受的位置</div>
+    </div>
+  </div>
+
+  <footer class="quiz-foot">
+    <span class="kbd-tip">小技巧：可以用键盘 <kbd>1</kbd>–<kbd>7</kbd> 快速作答</span>
+  </footer>
+</section>
+
+<!-- ==================== 计算中 ==================== -->
+<section class="screen" id="screen-loading">
+  <div class="load-wrap">
+    <div class="load-orb">
+      <span class="lo lo1">🔮</span>
+      <span class="lo lo2">🌱</span>
+  <span class="lo lo3">🛡️</span>
+      <span class="lo lo4">🎈</span>
+      <div class="load-core">🧩</div>
+    </div>
+    <h2 class="load-title" id="load-title">正在分析你的认知偏好…</h2>
+    <div class="load-bar"><div class="load-bar-fill" id="load-fill"></div></div>
+  </div>
+</section>
+
+<!-- ==================== 结果页 ==================== -->
+<section class="screen" id="screen-result">
+  <div class="result-wrap" id="result-wrap"><!-- JS 注入 --></div>
+</section>
+
+<script src="assets/js/questions.js"></script>
+<script src="assets/js/types.js"></script>
+<script src="assets/js/share.js"></script>
+<script src="assets/js/app.js"></script>
+</body>
+</html>
