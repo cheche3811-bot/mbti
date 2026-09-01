@@ -28,6 +28,10 @@ function buildVars(syn, prof, input) {
   const v = {};
   const arc = prof.archetype;
 
+  // 站点链接 —— CTA 拼接用。缺失时降级为空串，避免文案出现 {url} 残留
+  v.url = (SHARE_COPY_DATA.site && SHARE_COPY_DATA.site.url) || '';
+  v.siteLabel = (SHARE_COPY_DATA.site && SHARE_COPY_DATA.site.shortLabel) || '';
+
   v.archetype = arc.name;
   v.archetypeTitle = arc.title;
   v.oneLiner = prof.oneLiner;
@@ -238,8 +242,19 @@ function generateCopyCandidates(syn, prof, input, opt = {}) {
     // 极简式不加 CTA —— 加了就不极简了
     if (withCta && key !== 'minimal') {
       const ctas = SHARE_COPY_DATA.cta.list;
-      const cta = ctas[Math.floor(Math.random() * ctas.length)];
-      // 只在不超长的情况下附加
+      const raw = ctas[Math.floor(Math.random() * ctas.length)];
+      // 必须先插值再算长度：{url} 展开后约 40 字符，
+      // 用模板原文判断会严重低估，导致超出平台上限
+      let cta = interpolate(raw, vars);
+      // 长文案兜底：标准 CTA 挂不上时换极短版，
+      // 确保「链接一定出现」——没有链接的分享文案等于断了传播闭环
+      if (text.length + cta.length + 2 > maxLen) {
+        const shorts = SHARE_COPY_DATA.cta.short || [];
+        for (const sc of shorts) {
+          const t = interpolate(sc, vars);
+          if (text.length + t.length + 2 <= maxLen) { cta = t; break; }
+        }
+      }
       if (text.length + cta.length + 2 <= maxLen) {
         text += '\n\n' + cta;
       }

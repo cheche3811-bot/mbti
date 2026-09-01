@@ -22,7 +22,7 @@
  *  ◈ 菱形 mark + TRI·PERSONA 字标 + 四角装饰线
  * ============================================================ */
 
-const V2_W = 1080, V2_H = 2020;
+const V2_W = 1080, V2_H = 2080;
 const V2_PAD = 84;              // 左右安全边距
 const V2_INNER = V2_W - V2_PAD * 2;
 
@@ -369,7 +369,7 @@ async function buildShareCardV2(syn, prof, input, opt = {}) {
   });
 
   /* ================= 下段：品牌区 ================= */
-  const footY = V2_H - 210;
+  const footY = V2_H - 236;
 
   // 分隔装饰
   c.strokeStyle = theme.accent; c.lineWidth = 5; c.lineCap = 'round';
@@ -383,21 +383,38 @@ async function buildShareCardV2(syn, prof, input, opt = {}) {
   c.textAlign = 'center'; c.textBaseline = 'middle';
   c.font = V2F(40, 900);
   c.fillStyle = ink;
-  c.fillText('你又是哪一种人？', V2_W / 2, footY + 30);
+  c.fillText('你又是哪一种人？', V2_W / 2, footY + 26);
 
   // 品牌字标
   c.font = V2F(30, 900);
   const bt = BRAND.mark + ' ' + BRAND.name;
   const btw = c.measureText(bt).width + 62;
-  v2Pill(c, (V2_W - btw) / 2, footY + 66, btw, 66, theme.accent, ink, 5, 7);
+  v2Pill(c, (V2_W - btw) / 2, footY + 58, btw, 62, theme.accent, ink, 5, 7);
   c.fillStyle = '#FFFFFF';
   c.font = V2F(30, 900);
-  c.fillText(bt, V2_W / 2, footY + 99);
+  c.fillText(bt, V2_W / 2, footY + 89);
 
   // tagline
   c.font = V2F(22, 600);
   c.fillStyle = theme.sub;
-  c.fillText(BRAND.tagline, V2_W / 2, footY + 158);
+  c.fillText(BRAND.tagline, V2_W / 2, footY + 142);
+
+  /* ---------- 回链（关键：图片传播时能带人回站点）----------
+     原先分享图上没有任何链接，图在微信里流转时看到的人无法回来。
+     用短链文字而非二维码：文字可被 OCR/直接输入，且不占额外空间。 */
+  const siteLabel = (SHARE_COPY_DATA.site && SHARE_COPY_DATA.site.shortLabel) || '';
+  if (siteLabel) {
+    c.font = V2F(24, 800);
+    const lw = c.measureText(siteLabel).width + 56;
+    const ly = footY + 164;
+    // 描边胶囊，与整体贴纸风一致
+    c.strokeStyle = ink; c.lineWidth = 3.5;
+    v2RR(c, (V2_W - lw) / 2, ly, lw, 50, 25); c.stroke();
+    c.fillStyle = ink;
+    c.textAlign = 'center'; c.textBaseline = 'middle';
+    c.font = V2F(24, 800);
+    c.fillText(siteLabel, V2_W / 2, ly + 25);
+  }
 
   return { dataUrl: cv.toDataURL('image/png'), theme, badges };
 }

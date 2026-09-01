@@ -1,0 +1,245 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
+<defs>
+  <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0%" stop-color="#FFF3D6"/>
+    <stop offset="50%" stop-color="#FFFBF4"/>
+    <stop offset="100%" stop-color="#EFE6FF"/>
+  </linearGradient>
+  <pattern id="dots" width="34" height="34" patternUnits="userSpaceOnUse">
+    <circle cx="17" cy="17" r="2.6" fill="#2B2233" opacity="0.055"/>
+  </pattern>
+</defs>
+
+<rect width="1200" height="630" fill="url(#bg)"/>
+<rect width="1200" height="630" fill="url(#dots)"/>
+
+<!-- 顶部品牌色条 -->
+<g>
+  <rect x="0" y="0" width="240" height="12" fill="#FF8A6B"/>
+  <rect x="240" y="0" width="240" height="12" fill="#FFD84D"/>
+  <rect x="480" y="0" width="240" height="12" fill="#7DDCC0"/>
+  <rect x="720" y="0" width="240" height="12" fill="#8FC9F5"/>
+  <rect x="960" y="0" width="240" height="12" fill="#C4A9F5"/>
+</g>
+
+<!-- 四角装饰线 -->
+<g stroke="#FF8A6B" stroke-width="7" stroke-linecap="round" fill="none">
+  <path d="M44 92 L44 44 L92 44"/>
+  <path d="M1156 92 L1156 44 L1108 44"/>
+  <path d="M44 538 L44 586 L92 586"/>
+  <path d="M1156 538 L1156 586 L1108 586"/>
+</g>
+
+<!-- 左侧文字区 -->
+<g font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, sans-serif">
+  <!-- 品牌小标 -->
+  <g transform="translate(80,120)">
+    <rect x="0" y="0" width="268" height="46" rx="23" fill="#2B2233"/>
+    <text x="134" y="30" font-size="21" font-weight="800" fill="#FFD84D" text-anchor="middle">◈ TRI·PERSONA ◈</text>
+  </g>
+
+  <!-- 主标题 -->
+  <text x="80" y="238" font-size="70" font-weight="900" fill="#2B2233" letter-spacing="-2">三维性格分析</text>
+
+  <!-- 副标题 -->
+  <text x="80" y="300" font-size="30" font-weight="700" fill="#5A4E63">MBTI 人格 · 太阳星座 · 生辰八字</text>
+
+  <!-- 卖点胶囊 -->
+  <g transform="translate(80,340)">
+    <rect x="0" y="0" width="176" height="52" rx="26" fill="#FFD84D" stroke="#2B2233" stroke-width="4"/>
+    <text x="88" y="34" font-size="22" font-weight="800" fill="#2B2233" text-anchor="middle">48 题量表</text>
+
+    <rect x="192" y="0" width="200" height="52" rx="26" fill="#7DDCC0" stroke="#2B2233" stroke-width="4"/>
+    <text x="292" y="34" font-size="22" font-weight="800" fill="#2B2233" text-anchor="middle">三维交叉验证</text>
+
+    <rect x="408" y="0" width="176" height="52" rx="26" fill="#C4A9F5" stroke="#2B2233" stroke-width="4"/>
+    <text x="496" y="34" font-size="22" font-weight="800" fill="#2B2233" text-anchor="middle">来源可溯</text>
+  </g>
+
+  <!-- 底部 CTA -->
+  <text x="80" y="486" font-size="38" font-weight="900" fill="#2B2233">你是 16 型里的哪一型？</text>
+  <text x="80" y="534" font-size="23" font-weight="600" fill="#8A8095">扫码或点击链接 · 约 6 分钟 · 免费</text>
+</g>
+
+<!-- 右侧头像阵列（2×2 错落排布） -->
+<g transform="translate(775,105) scale(0.41015625) rotate(-8,256,256)">
+<defs><clipPath id="clip-INFP-circle-yvq05"><circle cx="256" cy="256" r="256"/></clipPath></defs>
+<g clip-path="url(#clip-INFP-circle-yvq05)">
+  <rect width="512" height="512" fill="#DFF6EA"/>
+  <g fill="#7DD8B0" opacity=".26">
+      <ellipse cx="88" cy="120" rx="17" ry="26" transform="rotate(-28 88 120)"/>
+      <ellipse cx="424" cy="160" rx="15" ry="24" transform="rotate(34 424 160)"/>
+      <ellipse cx="62" cy="278" rx="13" ry="21" transform="rotate(-14 62 278)"/>
+      <ellipse cx="450" cy="300" rx="14" ry="22" transform="rotate(22 450 300)"/></g>
+
+  <!-- 身体（肩部露出下缘）-->
+  <path d="M256 336c-72 0-130 44-130 100v76h260v-76c0-56-58-100-130-100z"
+        fill="#8FE0BE" stroke="#2B2233" stroke-width="10" stroke-linejoin="round"/>
+
+  
+  
+
+  <!-- 翅膀在头后 -->
+  <g opacity=".92" stroke="#2B2233" stroke-width="10" stroke-linejoin="round">
+      <path d="M136 250c-42-40-46-96-16-112 26-14 52 24 60 62z" fill="#A8E8CE"/>
+      <path d="M376 250c42-40 46-96 16-112-26-14-52 24-60 62z" fill="#A8E8CE"/>
+      <path d="M142 274c-34 22-40 68-16 78 20 8 40-20 48-48z" fill="#C4F0DE"/>
+      <path d="M370 274c34 22 40 68 16 78-20 8-40-20-48-48z" fill="#C4F0DE"/></g>
+
+  <!-- 耳朵 -->
+  <g fill="none" stroke="#2B2233" stroke-width="10" stroke-linejoin="round"><path d="M206 128c-14-30-8-54 4-64"/><path d="M306 128c14-30 8-54-4-64"/></g>
+      <g fill="#FF9EC4" stroke="#2B2233" stroke-width="10" stroke-linejoin="round"><circle cx="208" cy="58" r="14"/><circle cx="304" cy="58" r="14"/></g>
+
+  <!-- 头 -->
+  <ellipse cx="256" cy="236" rx="132" ry="122" fill="#8FE0BE" stroke="#2B2233" stroke-width="10" stroke-linejoin="round"/>
+
+  <!-- 面部浅色区 -->
+  <ellipse cx="256" cy="262" rx="96" ry="82" fill="#fff" opacity=".26"/>
+
+  
+  <g fill="#FF7FA8" opacity=".42"><ellipse cx="168" cy="286" rx="26" ry="17"/><ellipse cx="344" cy="286" rx="26" ry="17"/></g>
+
+  
+  <g><ellipse cx="212" cy="250" rx="20" ry="23" fill="#2B2233"/><ellipse cx="300" cy="250" rx="20" ry="23" fill="#2B2233"/>
+      <ellipse cx="220" cy="241" rx="8" ry="9" fill="#fff"/><ellipse cx="308" cy="241" rx="8" ry="9" fill="#fff"/>
+      <circle cx="204" cy="258" r="4" fill="#fff" opacity=".8"/><circle cx="292" cy="258" r="4" fill="#fff" opacity=".8"/></g>
+  <path d="M244 300h24" stroke="#2B2233" stroke-width="10" stroke-linecap="round"/>
+
+  <!-- 前景配饰 -->
+  
+</g>
+<circle cx="256" cy="256" r="248" fill="none" stroke="#2B2233" stroke-width="16"/>
+</g>
+<g transform="translate(975,225) scale(0.37109375) rotate(7,256,256)">
+<defs><clipPath id="clip-ENFP-circle-7vkv1"><circle cx="256" cy="256" r="256"/></clipPath></defs>
+<g clip-path="url(#clip-ENFP-circle-7vkv1)">
+  <rect width="512" height="512" fill="#E2F8EE"/>
+  <g opacity=".26">
+      <rect x="70" y="110" width="22" height="12" rx="6" fill="#FF9EC4" transform="rotate(-24 70 110)"/>
+      <rect x="410" y="146" width="22" height="12" rx="6" fill="#FFD84D" transform="rotate(30 410 146)"/>
+      <rect x="52" y="272" width="20" height="11" rx="5" fill="#8FC9F5" transform="rotate(14 52 272)"/>
+      <rect x="440" y="296" width="20" height="11" rx="5" fill="#C4A9F5" transform="rotate(-18 440 296)"/>
+      <circle cx="120" cy="70" r="8" fill="#FF8A6B"/><circle cx="396" cy="82" r="7" fill="#7DDCC0"/></g>
+
+  <!-- 身体（肩部露出下缘）-->
+  <path d="M256 336c-72 0-130 44-130 100v76h260v-76c0-56-58-100-130-100z"
+        fill="#F5D9A8" stroke="#2B2233" stroke-width="10" stroke-linejoin="round"/>
+
+  
+  
+
+  <!-- 翅膀在头后 -->
+  
+
+  <!-- 耳朵 -->
+  <g fill="#DCBC84" stroke="#2B2233" stroke-width="10" stroke-linejoin="round"><path d="M144 158c-24-28-26-72-8-88 18 12 34 44 40 64z"/>
+      <path d="M368 158c24-28 26-72 8-88-18 12-34 44-40 64z"/></g>
+
+  <!-- 头 -->
+  <ellipse cx="256" cy="236" rx="132" ry="122" fill="#F5D9A8" stroke="#2B2233" stroke-width="10" stroke-linejoin="round"/>
+
+  <!-- 面部浅色区 -->
+  <ellipse cx="256" cy="262" rx="96" ry="82" fill="#fff" opacity=".26"/>
+
+  
+  <g fill="#FF7FA8" opacity=".42"><ellipse cx="168" cy="286" rx="26" ry="17"/><ellipse cx="344" cy="286" rx="26" ry="17"/></g>
+
+  
+  <g fill="#2B2233"><path d="M212 226l7 17 18 1-14 12 5 18-16-10-16 10 5-18-14-12 18-1z"/>
+      <path d="M300 226l7 17 18 1-14 12 5 18-16-10-16 10 5-18-14-12 18-1z"/></g>
+  <path d="M226 288c14 26 46 26 60 0z" fill="#2B2233"/>
+      <path d="M240 302c0 18 8 30 18 30s16-12 16-30z" fill="#FF7FA8" stroke="#2B2233" stroke-width="7" stroke-linejoin="round"/>
+
+  <!-- 前景配饰 -->
+  
+</g>
+<circle cx="256" cy="256" r="248" fill="none" stroke="#2B2233" stroke-width="16"/>
+</g>
+<g transform="translate(755,335) scale(0.37109375) rotate(5,256,256)">
+<defs><clipPath id="clip-INTJ-circle-6yl1v"><circle cx="256" cy="256" r="256"/></clipPath></defs>
+<g clip-path="url(#clip-INTJ-circle-6yl1v)">
+  <rect width="512" height="512" fill="#E4DEF8"/>
+  <g fill="#8B7BD8" opacity=".26">
+      <path d="M92 108l7 17 18 1-14 12 5 18-16-10-16 10 5-18-14-12 18-1z"/>
+      <path d="M420 150l5 12 13 1-10 8 4 13-12-7-12 7 4-13-10-8 13-1z"/>
+      <circle cx="60" cy="230" r="6"/><circle cx="452" cy="270" r="7"/>
+      <circle cx="120" cy="60" r="5"/><circle cx="392" cy="72" r="5"/></g>
+
+  <!-- 身体（肩部露出下缘）-->
+  <path d="M256 336c-72 0-130 44-130 100v76h260v-76c0-56-58-100-130-100z"
+        fill="#9D8FE0" stroke="#2B2233" stroke-width="10" stroke-linejoin="round"/>
+
+  
+  
+
+  <!-- 翅膀在头后 -->
+  
+
+  <!-- 耳朵 -->
+  <g fill="#9D8FE0" stroke="#2B2233" stroke-width="10" stroke-linejoin="round"><path d="M150 138c-10-34 4-58 18-66-2 26 8 42 20 52z"/>
+      <path d="M362 138c10-34-4-58-18-66 2 26-8 42-20 52z"/></g>
+
+  <!-- 头 -->
+  <ellipse cx="256" cy="236" rx="132" ry="122" fill="#9D8FE0" stroke="#2B2233" stroke-width="10" stroke-linejoin="round"/>
+
+  <!-- 面部浅色区 -->
+  <ellipse cx="256" cy="262" rx="96" ry="82" fill="#fff" opacity=".26"/>
+
+  
+  
+
+  <g stroke="#2B2233" stroke-width="11" stroke-linecap="round" fill="none"><path d="M188 210h44"/><path d="M280 210h44"/></g>
+  <g><circle cx="212" cy="248" r="20" fill="#2B2233"/><circle cx="219" cy="240" r="6.5" fill="#fff"/>
+      <path d="M280 248c10 11 32 11 42 0" stroke="#2B2233" stroke-width="11" stroke-linecap="round" fill="none"/></g>
+  <path d="M242 290l14 24 14-24z" fill="#FFD84D" stroke="#2B2233" stroke-width="9" stroke-linejoin="round"/>
+
+  <!-- 前景配饰 -->
+  <g stroke="#2B2233" stroke-width="10" stroke-linejoin="round"><rect x="336" y="356" width="104" height="34" rx="16" fill="#8FC9F5"/>
+      <path d="M356 356v34M382 356v34M408 356v34" stroke-width="7"/></g>
+</g>
+<circle cx="256" cy="256" r="248" fill="none" stroke="#2B2233" stroke-width="16"/>
+</g>
+<g transform="translate(963.5,437.5) scale(0.322265625) rotate(-6,256,256)">
+<defs><clipPath id="clip-ESFP-circle-vx80u"><circle cx="256" cy="256" r="256"/></clipPath></defs>
+<g clip-path="url(#clip-ESFP-circle-vx80u)">
+  <rect width="512" height="512" fill="#FFF0DC"/>
+  <g fill="#FFCB85" opacity=".26">
+      <path d="M84 140c0-8 6-12 14-12v-34l24-6v10l-16 4v42c0 10-8 16-16 16s-14-6-14-14 6-14 14-14z" />
+      <path d="M416 176c0-6 5-10 11-10v-27l19-5v8l-13 3v34c0 8-6 13-13 13s-11-5-11-11 5-11 11-11z"/>
+      <circle cx="60" cy="288" r="11"/></g>
+
+  <!-- 身体（肩部露出下缘）-->
+  <path d="M256 336c-72 0-130 44-130 100v76h260v-76c0-56-58-100-130-100z"
+        fill="#8FC9F5" stroke="#2B2233" stroke-width="10" stroke-linejoin="round"/>
+
+  
+  
+
+  <!-- 翅膀在头后 -->
+  
+
+  <!-- 耳朵 -->
+  <g fill="#6FA8D4" stroke="#2B2233" stroke-width="10" stroke-linejoin="round"><path d="M256 130c-8-52 6-76 14-86 10 30 8 62-14 86z"/></g>
+
+  <!-- 头 -->
+  <ellipse cx="256" cy="236" rx="132" ry="122" fill="#8FC9F5" stroke="#2B2233" stroke-width="10" stroke-linejoin="round"/>
+
+  <!-- 面部浅色区 -->
+  <ellipse cx="256" cy="262" rx="96" ry="82" fill="#fff" opacity=".26"/>
+
+  
+  <g fill="#FF7FA8" opacity=".42"><ellipse cx="168" cy="286" rx="26" ry="17"/><ellipse cx="344" cy="286" rx="26" ry="17"/></g>
+
+  
+  <g fill="#2B2233"><path d="M212 226l7 17 18 1-14 12 5 18-16-10-16 10 5-18-14-12 18-1z"/>
+      <path d="M300 226l7 17 18 1-14 12 5 18-16-10-16 10 5-18-14-12 18-1z"/></g>
+  <ellipse cx="256" cy="302" rx="26" ry="22" fill="#2B2233"/>
+      <ellipse cx="256" cy="310" rx="14" ry="10" fill="#FF9EC4"/>
+
+  <!-- 前景配饰 -->
+  <g stroke="#2B2233" stroke-width="10" stroke-linejoin="round"><circle cx="196" cy="150" r="18" fill="#FF9EC4"/><circle cx="240" cy="132" r="18" fill="#FFD84D"/>
+      <circle cx="288" cy="132" r="18" fill="#7DDCC0"/><circle cx="332" cy="150" r="18" fill="#C4A9F5"/></g>
+</g>
+<circle cx="256" cy="256" r="248" fill="none" stroke="#2B2233" stroke-width="16"/>
+</g>
+</svg>

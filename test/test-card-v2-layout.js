@@ -88,6 +88,37 @@ console.log(`安全余量:       ${margin}px`);
 console.log(`最紧情况: ${worstD}`);
 console.log('');
 
+// ---------- 品牌区自身是否溢出画布下边界 ----------
+// 教训：加回链胶囊时只看了「内容区 vs 品牌区」，
+// 忘了品牌区自己也会超出画布底部，回链被裁掉。
+const brandItems = [
+  ['CTA 文字',   26,  0],
+  ['字标胶囊',   58,  62],
+  ['tagline',   142, 0],
+  ['回链胶囊',   164, 50],
+];
+let brandBottom = 0;
+const brandTop = H - footOff;   // 品牌区起点 = 画布高 - footY 偏移量
+brandItems.forEach(([n, off, h]) => {
+  const b = brandTop + off + h;
+  if (b > brandBottom) brandBottom = b;
+});
+const brandMargin = H - brandBottom;
+console.log('');
+console.log('品牌区内容最低点: ' + brandBottom + 'px');
+console.log('画布下边界:      ' + H + 'px');
+console.log('品牌区余量:      ' + brandMargin + 'px');
+if (brandMargin < 0) {
+  console.log('❌ 品牌区溢出画布 ' + (-brandMargin) + 'px —— 回链/字标会被裁掉');
+  process.exit(1);
+}
+if (brandMargin < 16) {
+  console.log('⚠️  品牌区余量不足 16px');
+  process.exit(1);
+}
+console.log('✅ 品牌区安全');
+console.log('');
+
 if (margin < 0) {
   console.log(`❌ 溢出 ${-margin}px —— 会与品牌区重叠`);
   process.exit(1);

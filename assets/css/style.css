@@ -1288,3 +1288,38 @@ kbd{
   .modal-acts{flex-direction:column}
   .modal-acts .modal-close{width:100%}
 }
+
+/* ============================================================
+   免责声明折叠态
+   目的：保留全部学术诚实内容，但不在情绪高点阻断用户。
+   摘要行始终可见 → 诚实性不打折；详情按需展开 → 不劝退。
+   ============================================================ */
+.bd-fold{padding:0;overflow:hidden}
+.bd-details{padding:0}
+.bd-details summary{
+  list-style:none;cursor:pointer;
+  display:flex;align-items:flex-start;gap:13px;
+  padding:20px 22px;
+  transition:background .2s;
+}
+.bd-details summary::-webkit-details-marker{display:none}
+.bd-details summary:hover{background:rgba(255,255,255,.06)}
+.bd-sum-ic{font-size:22px;flex:none;line-height:1.25}
+.bd-sum-txt{display:flex;flex-direction:column;gap:5px;flex:1}
+.bd-sum-txt b{font-size:14.5px;font-weight:900;color:var(--yellow)}
+.bd-sum-txt i{
+  font-size:11.5px;font-style:normal;line-height:1.7;
+  color:#C4BACE;font-weight:500;
+}
+/* 展开箭头 */
+.bd-details summary::after{
+  content:'▾';flex:none;
+  font-size:16px;color:var(--yellow);
+  transition:rotate .22s;margin-top:2px;
+}
+.bd-details[open] summary::after{rotate:180deg}
+/* 展开后的内容区留出内边距 */
+.bd-details[open] .bd-head,
+.bd-details ul,
+.bd-details .bd-foot{padding-left:22px;padding-right:22px}
+.bd-details .bd-foot{padding-bottom:22px}

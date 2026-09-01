@@ -544,10 +544,21 @@ function renderMultiResult() {
       </details>
     </div>`;
 
-  /* ---------- 免责声明 ---------- */
+  /* ---------- 免责声明 ----------
+     改为默认折叠：内容一条没删，但不再阻断情绪。
+     摘要行始终可见（保持学术诚实的可见性），
+     详细论证收进 <details>，想深究的人点开即可。 */
   const disclaimerHtml = `
-    <div class="big-disclaimer">
-      <div class="bd-head">⚠️ 重要声明</div>
+    <div class="big-disclaimer bd-fold">
+      <details class="bd-details">
+        <summary class="bd-summary">
+          <span class="bd-sum-ic">⚠️</span>
+          <span class="bd-sum-txt">
+            <b>重要声明</b>
+            <i>MBTI 有实证但存争议 · 星座与八字属传统文化，不具预测效力 · 点击查看完整依据</i>
+          </span>
+        </summary>
+      <div class="bd-head" style="margin-top:16px">详细说明</div>
       <ul>
         <li><b>MBTI</b>：有实证研究基础，但学界对其重测信度存在明确争议——间隔 5 周后约 50% 受测者的类型会发生变化（Pittenger, 2005）。四维度实际呈连续正态分布，而非「非此即彼」的双峰分布（Bess & Harvey, 2002）。</li>
         <li><b>星座</b>：属传统文化内容。发表于《自然》的双盲实验（Carlson, 1985）、2000+ 名时辰双生子追踪（Dean & Kelly, 2003）与 15000+ 样本检验（Hartmann et al., 2006）均未发现出生日期与人格的关联。感到「很准」主要由巴纳姆效应解释（Forer, 1949）。</li>
@@ -555,6 +566,7 @@ function renderMultiResult() {
         <li><b>综合分析</b>：一致性百分比是本项目的启发式设计，非已发表的实证发现。</li>
       </ul>
       <p class="bd-foot">本工具仅供自我探索与娱乐参考，<b>不可用于</b>招聘筛选、心理诊断、重大人生决策或任何评价他人的场合。如需专业的人格评估，请咨询有资质的心理学专业人士。</p>
+      </details>
     </div>`;
 
   /* ---------- 性格总结（核心区块，放在最前）---------- */
@@ -625,15 +637,25 @@ function renderMultiResult() {
     </div>`;
 
   /* ---------- 组装 ---------- */
+  /* ---------- 组装 ----------
+     区块顺序经过转化漏斗优化：
+
+     旧顺序的问题：分享区排第 9 位，且深色大免责声明（434 字）
+     紧贴其前。用户刚看完「我是稀有人格」的情绪高点，
+     立刻读到「MBTI 重测信度只有 50%」「占星已被实证否证」，
+     情绪散掉之后才看到分享按钮。
+
+     新顺序：画像 → 总结 → 分享（趁高点）→ 详情 → 严谨性（可折叠）
+     严谨性内容一条没删，只是从「路障」变成「可查阅的背书」。 */
   wrap.innerHTML = heroHtml
     + summaryHtml
+    + buildShareSection(syn, prof, input)   // ← 上移到情绪高点
     + `<div class="sec"><div class="sec-h"><span class="ic">🧩</span>三个维度分别怎么说</div></div>`
     + `<div class="dc-grid">${dimCards}</div>`
     + `<div class="sec"><div class="sec-h"><span class="ic">📊</span>五维特质对比${isSingle ? '' : '<span class="sec-tip">同一轴上三点越接近＝越一致</span>'}</div>${axisHtml}</div>`
     + crossHtml
     + methodHtml
     + disclaimerHtml
-    + buildShareSection(syn, prof, input)
     + `<div class="result-foot">
         <button class="btn-ghost" id="btn-multi-edit">✏️ 修改填写</button>
         <button class="btn-ghost" id="btn-multi-home">🏠 回到首页</button>

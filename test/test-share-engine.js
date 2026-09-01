@@ -149,7 +149,11 @@ ok(lenBad === 0, '各平台文案均未超长（含 CTA 附加后）');
 const wxCands = api.generateCopyCandidates(synA, profA, inputA, { platform:'wechat_moments' });
 const shortEnough = wxCands.filter(c => c.len <= 112).length;
 console.log('  朋友圈 ≤112 字（不折叠）的候选: ' + shortEnough + '/' + wxCands.length);
-ok(shortEnough >= 2, '至少 2 套不触发朋友圈折叠');
+// 拼接链接后（URL 约 40 字符），112 字免折叠的名额变紧，这是有意的权衡：
+// 宁可折叠也要保证链接在。极简式不加 CTA，天然最短，保证至少一套免折叠。
+ok(shortEnough >= 1, '至少 1 套不触发朋友圈折叠（含链接后的现实约束）');
+const minLen = Math.min(...wxCands.map(c => c.len));
+ok(minLen <= 60, '最短候选 ' + minLen + ' 字（配图发送场景可用）');
 
 console.log('\n========== 7. 轮换去重机制 ==========');
 LS = {};   // 清空
@@ -255,7 +259,24 @@ const definedBadges = D.badges.rules.map(r => r.id);
 const neverFired = definedBadges.filter(id => !allBadges.has(id));
 console.log('  未触发的徽章: ' + (neverFired.length ? neverFired.join(', ') : '无'));
 
-console.log('\n========== 11. 品牌信息 ==========');
+console.log('\n========== 11. CTA 链接拼接（传播闭环）==========');
+const siteUrl = D.site && D.site.url;
+ok(!!siteUrl, 'share-copy.json 含 site.url 配置：' + siteUrl);
+ok(!!(D.site && D.site.shortLabel), 'site.shortLabel 存在（分享图回链用）');
+// 所有 CTA 必须含 {url} 占位符 —— 否则「👉」后面是空的
+const ctaNoUrl = D.cta.list.filter(c => !c.includes('{url}'));
+ok(ctaNoUrl.length === 0, '全部 CTA 含 {url} 占位符' + (ctaNoUrl.length ? '，缺: ' + ctaNoUrl.join(' | ') : ''));
+// 生成的文案里 URL 必须已展开
+const ctaCands = api.generateCopyCandidates(synA, profA, inputA, { withCta: true });
+const nonMinimal = ctaCands.filter(c => c.styleKey !== 'minimal');
+const withLink = nonMinimal.filter(c => c.text.includes(siteUrl));
+ok(withLink.length === nonMinimal.length,
+   '非极简式文案全部含可点击链接 ' + withLink.length + '/' + nonMinimal.length);
+ok(!ctaCands.some(c => c.text.includes('{url}')), '无 {url} 占位符残留');
+// 加了 URL 后仍不能超长
+ok(!ctaCands.some(c => c.len > 120), '拼接链接后仍未超朋友圈上限');
+
+console.log('\n========== 12. 品牌信息 ==========');
 ok(!!D.brand.name && !!D.brand.en && !!D.brand.tagline && !!D.brand.mark, '品牌四要素齐备');
 console.log('  ' + D.brand.mark + ' ' + D.brand.name + ' / ' + D.brand.en + ' — ' + D.brand.tagline);
 

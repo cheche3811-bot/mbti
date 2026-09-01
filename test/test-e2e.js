@@ -329,6 +329,18 @@ ok(rh.includes('ach-ic'), '成就徽章已渲染');
 const ccTexts = rh.match(/class="cc-text">([^<]*)</g) || [];
 ok(ccTexts.length > 0 && !ccTexts.some(t => /\{\w+\}/.test(t)), '候选文案无未替换占位符');
 
+// ---- 转化优化验证（P0/P1 修复）----
+// 分享区必须在免责声明之前 —— 趁情绪高点，别被冷水浇灭
+ok(rh.indexOf('share-sec') < rh.indexOf('big-disclaimer'),
+   '分享区排在免责声明之前（情绪高点分享）');
+ok(rh.indexOf('share-sec') < rh.indexOf('dc-grid'),
+   '分享区排在维度详情卡之前（第 3 位）');
+// 免责声明必须折叠但内容完整
+ok(rh.includes('bd-details') && rh.includes('bd-summary'),
+   '免责声明改为可折叠（不阻断情绪）');
+ok(rh.includes('Pittenger') && rh.includes('Carlson') && rh.includes('巴纳姆'),
+   '折叠后学术诚实内容一条未删');
+
 console.log('\n========== 10. 文献引用完整性 ==========');
 const allSrc = Object.keys(api.SOURCES_DATA.sources);
 ok(allSrc.length === 21, '文献总数 21 条，实得 ' + allSrc.length);
