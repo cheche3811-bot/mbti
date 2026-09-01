@@ -1,3 +1,8 @@
 .DS_Store
 node_modules/
 *.log
+
+# 预览产物（由脚本生成，不入库）
+# 需要时用 node test/gen-animal-preview.js 重新生成
+animal-preview.html
+avatar-preview.html
