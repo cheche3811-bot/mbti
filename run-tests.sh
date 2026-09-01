@@ -38,6 +38,7 @@ SUITES=(
   test-e2e
   test-share-layout
   test-card-v2-layout
+  test-share-url
 )
 
 total=0

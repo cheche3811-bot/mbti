@@ -28,8 +28,12 @@ function buildVars(syn, prof, input) {
   const v = {};
   const arc = prof.archetype;
 
-  // 站点链接 —— CTA 拼接用。缺失时降级为空串，避免文案出现 {url} 残留
-  v.url = (SHARE_COPY_DATA.site && SHARE_COPY_DATA.site.url) || '';
+  // 站点链接 —— CTA 拼接用。
+  // 优先用「带结果参数的专属链接」（window.__currentShareUrl，
+  // 由 share-url.js 的 writeResultUrl 写入），否则退回站点根链接。
+  v.url = (typeof window !== 'undefined' && window.__currentShareUrl)
+    || (SHARE_COPY_DATA.site && SHARE_COPY_DATA.site.url)
+    || '';
   v.siteLabel = (SHARE_COPY_DATA.site && SHARE_COPY_DATA.site.shortLabel) || '';
 
   v.archetype = arc.name;

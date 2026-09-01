@@ -158,6 +158,14 @@ function renderResult() {
     </div>`).join('');
 
   $('#result-wrap').innerHTML = `
+    ${window.__sharedView ? `
+    <div class="shared-banner">
+      <div class="sb-txt">
+        <b>这是 TA 的 MBTI 结果</b>
+        <span>${r.full}「${T.cn}」 · 你也来测测看</span>
+      </div>
+      <button class="btn-share sb-btn" id="btn-me-too">🧩 测测我自己</button>
+    </div>` : ''}
     <div class="hero-card" style="--gc:${G.light}">
       ${rare ? `<div class="hc-rare">稀有 · 仅 ${T.pct}</div>` : ''}
       <div class="hc-face">${typeof mbtiAvatar === "function" ? mbtiAvatar(r.type, 108, false) : T.face}</div>
@@ -236,6 +244,15 @@ function renderResult() {
       </div>
     </div>
 
+    <div class="unlock-card">
+      <div class="uc-face">🔮</div>
+      <div class="uc-txt">
+        <b>还想更懂自己？</b>
+        <span>叠加星座 + 生辰八字，看三套体系怎么交叉验证</span>
+      </div>
+      <button class="btn-unlock" id="btn-unlock3d">＋30 秒解锁三维报告 →</button>
+    </div>
+
     <div class="result-foot">
       <button class="btn-ghost" id="btn-again">🔄 重新测一次</button>
  <button class="btn-ghost" id="btn-home">🏠 回到首页</button>
@@ -264,6 +281,11 @@ function renderResult() {
   });
 
   bindResult();
+
+  // 结果写入地址栏（可复制链接分享，打开时回流渲染）
+  if (typeof writeResultUrl === 'function') {
+    writeResultUrl(state.result, null, null);
+  }
 }
 
 /* ---------- 结果页事件 ---------- */
@@ -272,15 +294,37 @@ function bindResult() {
   const T = TYPES[r.type];
 
   $('#btn-again').onclick = () => {
+    if (typeof resetSharedView === 'function') resetSharedView();
     state.idx = 0;
     state.answers.fill(null);
     render();
     go('quiz');
   };
-  $('#btn-home').onclick = () => go('home');
+  $('#btn-home').onclick = () => {
+    if (typeof resetSharedView === 'function') resetSharedView();
+    go('home');
+  };
+
+  // 解锁三维报告（把精确 percent 带入三维表单）
+  const unlock = $('#btn-unlock3d');
+  if (unlock) unlock.onclick = () => {
+    if (typeof openMultiFromQuiz === 'function') openMultiFromQuiz(state.result);
+    else go('form');
+  };
+
+  // 打开他人结果时的「测测我自己」
+  const meToo = $('#btn-me-too');
+  if (meToo) meToo.onclick = () => {
+    if (typeof resetSharedView === 'function') resetSharedView();
+    state.idx = 0;
+    state.answers.fill(null);
+    render();
+    go('quiz');
+  };
 
   $('#btn-copy').onclick = () => {
-    const txt = `我的 MBTI 人格是 ${r.full}「${T.cn}」— ${T.title}\n\n${T.slogan}\n\n全球仅 ${T.pct} 的人是这一型。你是哪一型？来测测看 👉`;
+    const url = window.__currentShareUrl || '';
+    const txt = `我的 MBTI 人格是 ${r.full}「${T.cn}」— ${T.title}\n\n${T.slogan}\n\n全球仅 ${T.pct} 的人是这一型。你是哪一型？来测测看 👉\n${url}`;
     navigator.clipboard.writeText(txt)
       .then(() => toast('文案已复制，去粘贴吧 ✨'))
       .catch(() => toast('复制失败，请手动选择文字'));
@@ -329,6 +373,7 @@ function toast(msg) {
 buildScale();
 
 $('#btn-start').onclick = () => {
+  if (typeof resetSharedView === 'function') resetSharedView();
   state.idx = 0;
   state.answers.fill(null);
   render();

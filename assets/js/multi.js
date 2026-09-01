@@ -9,6 +9,7 @@
 const mState = {
   mbtiType: null,      // 'INTJ' 等
   mbtiIdentity: null,  // 'A' | 'T'
+  mbtiPercent: null,   // 48 题精确百分比（来自答题页回流），null 表示手动选择
   zodiacKey: null,     // 手动选择的星座
   birthDate: null,     // 'YYYY-MM-DD'
   birthHour: '',       // '' | 0-23
@@ -49,17 +50,59 @@ function buildMbtiPicker() {
       if (mState.mbtiType === code) {
         mState.mbtiType = null;
         mState.mbtiIdentity = null;
+        mState.mbtiPercent = null;   // 手动操作后不再沿用回流百分比
         $('#mp-identity-wrap').hidden = true;
         $$('#mp-identity .seg-btn').forEach(b => b.classList.remove('on'));
       } else {
         mState.mbtiType = code;
+        mState.mbtiPercent = null;   // 手动改选类型 → 走 75% 估算
         $('#mp-identity-wrap').hidden = false;
       }
       grid.querySelectorAll('.mp-item').forEach(b =>
         b.classList.toggle('on', b.dataset.code === mState.mbtiType));
+      updateMbtiPreciseNote();
       updateFormStatus();
     });
   });
+}
+
+/* ---------- 从 48 题答题结果跳转（精确百分比回流） ----------
+   由 app.js 结果页「解锁三维报告」按钮调用：
+   把答题得到的精确 percent 带入三维表单，避免 75% 估算降级。 */
+function openMultiFromQuiz(mbtiResult) {
+  if (typeof resetSharedView === 'function') resetSharedView();
+  mState.mbtiType = mbtiResult.type;
+  mState.mbtiIdentity = mbtiResult.identity;
+  mState.mbtiPercent = mbtiResult.percent || null;
+  mState.zodiacKey = null;
+  mState.birthDate = null;
+  mState.birthHour = '';
+  mState.result = null;
+
+  syncMbtiPickerUI();
+  updateMbtiPreciseNote();
+  updateFormStatus();
+  go('form');
+}
+
+/* 让 16 型选择网格与身份段回显 mState 里的值 */
+function syncMbtiPickerUI() {
+  const grid = $('#mp-grid');
+  if (grid) {
+    grid.querySelectorAll('.mp-item').forEach(b =>
+      b.classList.toggle('on', b.dataset.code === mState.mbtiType));
+  }
+  const idWrap = $('#mp-identity-wrap');
+  if (idWrap) idWrap.hidden = !mState.mbtiType;
+  $$('#mp-identity .seg-btn').forEach(b =>
+    b.classList.toggle('on', b.dataset.v === mState.mbtiIdentity));
+}
+
+/* 回显「已带入精确结果」提示 */
+function updateMbtiPreciseNote() {
+  const note = $('#mbti-precise-note');
+  if (!note) return;
+  note.hidden = !(mState.mbtiType && mState.mbtiPercent);
 }
 
 /* ---------- A/T 身份 ---------- */
@@ -228,6 +271,10 @@ function runMultiAnalysis() {
       type: mState.mbtiType,
       identity: mState.mbtiIdentity || 'A'   // 未选身份时默认 A
     };
+    // 若有 48 题精确百分比，直接带入，走 mbtiToVector() 而非 75% 估算
+    if (mState.mbtiPercent) {
+      input.mbti.percent = mState.mbtiPercent;
+    }
   }
 
   if (mState.zodiacKey) {
@@ -647,7 +694,15 @@ function renderMultiResult() {
 
      新顺序：画像 → 总结 → 分享（趁高点）→ 详情 → 严谨性（可折叠）
      严谨性内容一条没删，只是从「路障」变成「可查阅的背书」。 */
-  wrap.innerHTML = heroHtml
+  wrap.innerHTML = (window.__sharedView ? `
+    <div class="shared-banner">
+      <div class="sb-txt">
+        <b>这是 TA 的性格报告</b>
+        <span>${syn.dims.map(d => d.label).join(' + ')} · 你也来测测看</span>
+      </div>
+      <button class="btn-share sb-btn" id="btn-me-too">🧩 测测我自己</button>
+    </div>` : '')
+    + heroHtml
     + summaryHtml
     + buildShareSection(syn, prof, input)   // ← 上移到情绪高点
     + `<div class="sec"><div class="sec-h"><span class="ic">🧩</span>三个维度分别怎么说</div></div>`
@@ -673,7 +728,24 @@ function renderMultiResult() {
       </div>`;
 
   bindMultiResult();
+  writeMultiUrl();
   window.scrollTo({ top: 0 });
+}
+
+/* 把当前三维结果编码进地址栏（供分享链接使用） */
+function writeMultiUrl() {
+  const { input } = mState.result;
+  if (typeof writeResultUrl !== 'function') return;
+
+  const mbtiObj = input.mbti
+    ? { type: input.mbti.type, identity: input.mbti.identity, percent: input.mbti.percent || null }
+    : null;
+  const zodiacKey = input.zodiac ? input.zodiac.key : null;
+  const baziParam = mState.birthDate
+    ? mState.birthDate + (mState.birthHour !== '' && mState.birthHour !== null && mState.birthHour !== undefined ? '-' + mState.birthHour : '')
+    : null;
+
+  writeResultUrl(mbtiObj, zodiacKey, baziParam);
 }
 
 /* ---------- 各维度详情区块 ---------- */
@@ -760,16 +832,26 @@ function renderDimBody(d, input) {
 /* ---------- 结果页事件 ---------- */
 function bindMultiResult() {
   const edit = $('#btn-multi-edit');
-  if (edit) edit.onclick = () => go('form');
+  if (edit) edit.onclick = () => { if (typeof resetSharedView === 'function') resetSharedView(); go('form'); };
 
   const home = $('#btn-multi-home');
-  if (home) home.onclick = () => go('home');
+  if (home) home.onclick = () => { if (typeof resetSharedView === 'function') resetSharedView(); go('home'); };
 
   const add = $('#btn-add-dim');
-  if (add) add.onclick = () => go('form');
+  if (add) add.onclick = () => { if (typeof resetSharedView === 'function') resetSharedView(); go('form'); };
+
+  const meToo = $('#btn-me-too');
+  if (meToo) meToo.onclick = () => {
+    if (typeof resetSharedView === 'function') resetSharedView();
+    state.idx = 0;
+    state.answers.fill(null);
+    render();
+    go('quiz');
+  };
 
   const quiz = $('#btn-do-quiz-inline');
   if (quiz) quiz.onclick = () => {
+    if (typeof resetSharedView === 'function') resetSharedView();
     state.idx = 0;
     state.answers.fill(null);
     render();
@@ -850,11 +932,12 @@ function initMulti() {
   bindBirthDate();
   updateFormStatus();
 
-  $('#btn-multi').onclick = () => go('form');
-  $('#btn-form-back').onclick = () => go('home');
+  $('#btn-multi').onclick = () => { if (typeof resetSharedView === 'function') resetSharedView(); go('form'); };
+  $('#btn-form-back').onclick = () => { if (typeof resetSharedView === 'function') resetSharedView(); go('home'); };
   $('#btn-analyze').onclick = runMultiAnalysis;
 
   $('#btn-goto-quiz').onclick = () => {
+    if (typeof resetSharedView === 'function') resetSharedView();
     state.idx = 0;
     state.answers.fill(null);
     render();

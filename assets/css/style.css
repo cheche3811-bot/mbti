@@ -623,6 +623,47 @@ kbd{
 .btn-ghost:hover{transform:translate(-2px,-2px);box-shadow:5px 5px 0 var(--line)}
 .btn-ghost:active{transform:translate(2px,2px);box-shadow:1px 1px 0 var(--line)}
 
+/* ---------- 解锁三维报告入口（MBTI 结果页） ---------- */
+.unlock-card{
+  margin-top:22px;
+  display:flex;align-items:center;gap:16px;flex-wrap:wrap;
+  background:#fff;border:3px solid var(--line);border-radius:var(--r-lg);
+  padding:18px;box-shadow:var(--shadow);
+}
+.uc-face{font-size:40px;line-height:1;flex:none}
+.uc-txt{flex:1 1 200px;display:flex;flex-direction:column;gap:4px;text-align:left}
+.uc-txt b{font-size:15.5px;font-weight:900}
+.uc-txt span{font-size:12.5px;color:var(--ink-2);font-weight:600;line-height:1.55}
+.btn-unlock{
+  flex:1 1 100%;display:inline-flex;align-items:center;justify-content:center;gap:6px;
+  background:var(--coral);color:var(--ink);
+  border:2.5px solid var(--line);border-radius:999px;
+  padding:13px 20px;font-family:var(--font);font-size:14.5px;font-weight:900;
+  cursor:pointer;box-shadow:var(--shadow-sm);
+  transition:transform .12s,box-shadow .12s;
+}
+.btn-unlock:hover{transform:translate(-2px,-2px);box-shadow:5px 5px 0 var(--line)}
+.btn-unlock:active{transform:translate(2px,2px);box-shadow:1px 1px 0 var(--line)}
+
+/* ---------- 打开他人结果时的回流横幅 ---------- */
+.shared-banner{
+  display:flex;align-items:center;gap:14px;flex-wrap:wrap;
+  background:linear-gradient(135deg,var(--lilac),var(--yellow));
+  border:3px solid var(--line);border-radius:var(--r-lg);
+  padding:16px 18px;box-shadow:var(--shadow);margin-bottom:18px;
+}
+.sb-txt{flex:1 1 180px;display:flex;flex-direction:column;gap:3px;text-align:left}
+.sb-txt b{font-size:16px;font-weight:900}
+.sb-txt span{font-size:12.5px;color:var(--ink-2);font-weight:700;line-height:1.5}
+.sb-btn{flex:none;padding:12px 22px}
+
+/* ---------- 表单里的精确结果提示 ---------- */
+.fs-precise{
+  margin:12px 0 0;padding:10px 14px;
+  background:var(--tint-mint);border:2px solid var(--mint);border-radius:var(--r-sm);
+  font-size:12.5px;font-weight:700;color:var(--ink);line-height:1.6;
+}
+
 .disclaimer{
   margin-top:26px;text-align:center;
   font-size:11.5px;color:var(--ink-2);line-height:1.8;font-weight:600;
