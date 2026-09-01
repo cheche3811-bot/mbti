@@ -1,0 +1,43 @@
+<svg viewBox="0 0 512 512" width="512" height="512" xmlns="http://www.w3.org/2000/svg" class="ani-av" data-type="ESFP">
+<defs><clipPath id="clip-ESFP-squircle-35brw"><rect x="0" y="0" width="512" height="512" rx="112"/></clipPath></defs>
+<g clip-path="url(#clip-ESFP-squircle-35brw)">
+  <rect width="512" height="512" fill="#FFF0DC"/>
+  <g fill="#FFCB85" opacity=".26">
+      <path d="M84 140c0-8 6-12 14-12v-34l24-6v10l-16 4v42c0 10-8 16-16 16s-14-6-14-14 6-14 14-14z" />
+      <path d="M416 176c0-6 5-10 11-10v-27l19-5v8l-13 3v34c0 8-6 13-13 13s-11-5-11-11 5-11 11-11z"/>
+      <circle cx="60" cy="288" r="11"/></g>
+
+  <!-- 身体（肩部露出下缘）-->
+  <path d="M256 336c-72 0-130 44-130 100v76h260v-76c0-56-58-100-130-100z"
+        fill="#8FC9F5" stroke="#2B2233" stroke-width="10" stroke-linejoin="round"/>
+
+  
+  
+
+  <!-- 翅膀在头后 -->
+  
+
+  <!-- 耳朵 -->
+  <g fill="#6FA8D4" stroke="#2B2233" stroke-width="10" stroke-linejoin="round"><path d="M256 130c-8-52 6-76 14-86 10 30 8 62-14 86z"/></g>
+
+  <!-- 头 -->
+  <ellipse cx="256" cy="236" rx="132" ry="122" fill="#8FC9F5" stroke="#2B2233" stroke-width="10" stroke-linejoin="round"/>
+
+  <!-- 面部浅色区 -->
+  <ellipse cx="256" cy="262" rx="96" ry="82" fill="#fff" opacity=".26"/>
+
+  
+  <g fill="#FF7FA8" opacity=".42"><ellipse cx="168" cy="286" rx="26" ry="17"/><ellipse cx="344" cy="286" rx="26" ry="17"/></g>
+
+  
+  <g fill="#2B2233"><path d="M212 226l7 17 18 1-14 12 5 18-16-10-16 10 5-18-14-12 18-1z"/>
+      <path d="M300 226l7 17 18 1-14 12 5 18-16-10-16 10 5-18-14-12 18-1z"/></g>
+  <ellipse cx="256" cy="302" rx="26" ry="22" fill="#2B2233"/>
+      <ellipse cx="256" cy="310" rx="14" ry="10" fill="#FF9EC4"/>
+
+  <!-- 前景配饰 -->
+  <g stroke="#2B2233" stroke-width="10" stroke-linejoin="round"><circle cx="196" cy="150" r="18" fill="#FF9EC4"/><circle cx="240" cy="132" r="18" fill="#FFD84D"/>
+      <circle cx="288" cy="132" r="18" fill="#7DDCC0"/><circle cx="332" cy="150" r="18" fill="#C4A9F5"/></g>
+</g>
+<rect x="8" y="8" width="496" height="496" rx="106" fill="none" stroke="#2B2233" stroke-width="16"/>
+</svg>

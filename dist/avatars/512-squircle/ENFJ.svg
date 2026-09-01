@@ -1,0 +1,44 @@
+<svg viewBox="0 0 512 512" width="512" height="512" xmlns="http://www.w3.org/2000/svg" class="ani-av" data-type="ENFJ">
+<defs><clipPath id="clip-ENFJ-squircle-ek3ou"><rect x="0" y="0" width="512" height="512" rx="112"/></clipPath></defs>
+<g clip-path="url(#clip-ENFJ-squircle-ek3ou)">
+  <rect width="512" height="512" fill="#D4F2E2"/>
+  <g fill="none" stroke="#4DC98F" stroke-width="14" stroke-linecap="round" opacity=".26">
+      <path d="M46 100l34 30"/><path d="M466 100l-34 30"/>
+      <path d="M30 230h40"/><path d="M482 230h-40"/>
+      <path d="M52 340l34-24"/><path d="M460 340l-34-24"/></g>
+
+  <!-- 身体（肩部露出下缘）-->
+  <path d="M256 336c-72 0-130 44-130 100v76h260v-76c0-56-58-100-130-100z"
+        fill="#F0C070" stroke="#2B2233" stroke-width="10" stroke-linejoin="round"/>
+
+  
+  
+
+  <!-- 翅膀在头后 -->
+  
+
+  <!-- 耳朵 -->
+  <g fill="#D9A455" stroke="#2B2233" stroke-width="10" stroke-linejoin="round"><ellipse cx="132" cy="230" rx="34" ry="60"/>
+      <ellipse cx="380" cy="230" rx="34" ry="60"/></g>
+
+  <!-- 头 -->
+  <ellipse cx="256" cy="236" rx="132" ry="122" fill="#F0C070" stroke="#2B2233" stroke-width="10" stroke-linejoin="round"/>
+
+  <!-- 面部浅色区 -->
+  <ellipse cx="256" cy="262" rx="96" ry="82" fill="#fff" opacity=".26"/>
+
+  
+  <g fill="#FF7FA8" opacity=".42"><ellipse cx="168" cy="286" rx="26" ry="17"/><ellipse cx="344" cy="286" rx="26" ry="17"/></g>
+
+  
+  <g stroke="#2B2233" stroke-width="11" stroke-linecap="round" fill="none">
+      <path d="M192 254c8-14 28-14 36 0"/><path d="M284 254c8-14 28-14 36 0"/></g>
+  <path d="M224 290c14 30 50 30 64 0z" fill="#2B2233"/>
+      <path d="M240 306c8 8 24 8 32 0z" fill="#FF9EC4"/>
+
+  <!-- 前景配饰 -->
+  <g stroke="#2B2233" stroke-width="10" stroke-linejoin="round"><path d="M170 366c26 18 54 26 86 26s60-8 86-26v34c-26 18-54 26-86 26s-60-8-86-26z" fill="#FF8A6B"/>
+      <path d="M320 392l24 56-30 8-16-52z" fill="#FF8A6B"/></g>
+</g>
+<rect x="8" y="8" width="496" height="496" rx="106" fill="none" stroke="#2B2233" stroke-width="16"/>
+</svg>

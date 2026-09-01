@@ -1,0 +1,45 @@
+<svg viewBox="0 0 512 512" width="512" height="512" xmlns="http://www.w3.org/2000/svg" class="ani-av" data-type="ENFP">
+<defs><clipPath id="clip-ENFP-circle-za0cx"><circle cx="256" cy="256" r="256"/></clipPath></defs>
+<g clip-path="url(#clip-ENFP-circle-za0cx)">
+  <rect width="512" height="512" fill="#E2F8EE"/>
+  <g opacity=".26">
+      <rect x="70" y="110" width="22" height="12" rx="6" fill="#FF9EC4" transform="rotate(-24 70 110)"/>
+      <rect x="410" y="146" width="22" height="12" rx="6" fill="#FFD84D" transform="rotate(30 410 146)"/>
+      <rect x="52" y="272" width="20" height="11" rx="5" fill="#8FC9F5" transform="rotate(14 52 272)"/>
+      <rect x="440" y="296" width="20" height="11" rx="5" fill="#C4A9F5" transform="rotate(-18 440 296)"/>
+      <circle cx="120" cy="70" r="8" fill="#FF8A6B"/><circle cx="396" cy="82" r="7" fill="#7DDCC0"/></g>
+
+  <!-- 身体（肩部露出下缘）-->
+  <path d="M256 336c-72 0-130 44-130 100v76h260v-76c0-56-58-100-130-100z"
+        fill="#F5D9A8" stroke="#2B2233" stroke-width="10" stroke-linejoin="round"/>
+
+  
+  
+
+  <!-- 翅膀在头后 -->
+  
+
+  <!-- 耳朵 -->
+  <g fill="#DCBC84" stroke="#2B2233" stroke-width="10" stroke-linejoin="round"><path d="M144 158c-24-28-26-72-8-88 18 12 34 44 40 64z"/>
+      <path d="M368 158c24-28 26-72 8-88-18 12-34 44-40 64z"/></g>
+
+  <!-- 头 -->
+  <ellipse cx="256" cy="236" rx="132" ry="122" fill="#F5D9A8" stroke="#2B2233" stroke-width="10" stroke-linejoin="round"/>
+
+  <!-- 面部浅色区 -->
+  <ellipse cx="256" cy="262" rx="96" ry="82" fill="#fff" opacity=".26"/>
+
+  
+  <g fill="#FF7FA8" opacity=".42"><ellipse cx="168" cy="286" rx="26" ry="17"/><ellipse cx="344" cy="286" rx="26" ry="17"/></g>
+
+  
+  <g fill="#2B2233"><path d="M212 226l7 17 18 1-14 12 5 18-16-10-16 10 5-18-14-12 18-1z"/>
+      <path d="M300 226l7 17 18 1-14 12 5 18-16-10-16 10 5-18-14-12 18-1z"/></g>
+  <path d="M226 288c14 26 46 26 60 0z" fill="#2B2233"/>
+      <path d="M240 302c0 18 8 30 18 30s16-12 16-30z" fill="#FF7FA8" stroke="#2B2233" stroke-width="7" stroke-linejoin="round"/>
+
+  <!-- 前景配饰 -->
+  
+</g>
+<circle cx="256" cy="256" r="248" fill="none" stroke="#2B2233" stroke-width="16"/>
+</svg>

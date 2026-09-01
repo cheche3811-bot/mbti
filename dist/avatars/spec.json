@@ -1,0 +1,354 @@
+{
+  "INTJ": {
+    "animal": "深夜猫头鹰",
+    "emoji": "🦉",
+    "group": "analyst",
+    "colors": {
+      "main": "#8B7BD8",
+      "bg": "#E4DEF8",
+      "body": "#9D8FE0",
+      "shade": "#7B6BC4",
+      "accent": "#FFD84D"
+    },
+    "elements": {
+      "ears": "tuft",
+      "eye": "oneClosed",
+      "brow": "flat",
+      "mouth": "beakSmall",
+      "acc": "blueprint",
+      "pattern": "stars",
+      "blush": false
+    },
+    "trait": "猫头鹰夜间独行、视野锐利，对应 Ni 主导的长线推演与独处偏好"
+  },
+  "INTP": {
+    "animal": "走神黑猫",
+    "emoji": "🐈‍⬛",
+    "group": "analyst",
+    "colors": {
+      "main": "#A594E8",
+      "bg": "#EBE5FB",
+      "body": "#8B7FA8",
+      "shade": "#6E6489",
+      "accent": "#FFF3D6"
+    },
+    "elements": {
+      "ears": "cat",
+      "eye": "glasses",
+      "brow": "none",
+      "mouth": "w",
+      "acc": "question",
+      "pattern": "gears",
+      "blush": false
+    },
+    "trait": "猫的好奇与漫不经心并存，Ti 的自娱式钻研——想得多、动得少"
+  },
+  "ENTJ": {
+    "animal": "指挥雄鹰",
+    "emoji": "🦅",
+    "group": "analyst",
+    "colors": {
+      "main": "#7B5FD1",
+      "bg": "#DED5F5",
+      "body": "#8E76D9",
+      "shade": "#6B4FBF",
+      "accent": "#FF8A6B"
+    },
+    "elements": {
+      "ears": "none",
+      "eye": "sharp",
+      "brow": "angry",
+      "mouth": "beak",
+      "acc": "cape",
+      "pattern": "rays",
+      "blush": false
+    },
+    "trait": "鹰高空俯瞰、精准出击，Te 的统筹与决断力"
+  },
+  "ENTP": {
+    "animal": "抬杠狐狸",
+    "emoji": "🦊",
+    "group": "analyst",
+    "colors": {
+      "main": "#B49BF0",
+      "bg": "#EDE6FD",
+      "body": "#C9A0E8",
+      "shade": "#A87FD1",
+      "accent": "#FFD84D"
+    },
+    "elements": {
+      "ears": "fox",
+      "eye": "wink",
+      "brow": "raised",
+      "mouth": "smirk",
+      "acc": "pen",
+      "pattern": "bubbles",
+      "blush": false
+    },
+    "trait": "狐狸机敏善辩，Ne 的联想爆发与「压力测试」式抬杠"
+  },
+  "INFJ": {
+    "animal": "树精绿老头",
+    "emoji": "🌳",
+    "group": "diplomat",
+    "colors": {
+      "main": "#5FBF95",
+      "bg": "#D8F0E4",
+      "body": "#7FCFA8",
+      "shade": "#4FA87F",
+      "accent": "#FFF3D6"
+    },
+    "elements": {
+      "ears": "leaf",
+      "eye": "closed",
+      "brow": "none",
+      "mouth": "gentle",
+      "acc": "beard",
+      "pattern": "rings",
+      "blush": false
+    },
+    "trait": "古树般沉静深远，Ni+Fe 的洞察力与守护感"
+  },
+  "INFP": {
+    "animal": "做梦小蝴蝶",
+    "emoji": "🦋",
+    "group": "diplomat",
+    "colors": {
+      "main": "#7DD8B0",
+      "bg": "#DFF6EA",
+      "body": "#8FE0BE",
+      "shade": "#6BC49B",
+      "accent": "#FF9EC4"
+    },
+    "elements": {
+      "ears": "antenna",
+      "eye": "teary",
+      "brow": "none",
+      "mouth": "small",
+      "acc": "wings",
+      "pattern": "petals",
+      "blush": true
+    },
+    "trait": "蝴蝶脆弱而自由，Fi 主导的丰富内在世界与理想主义"
+  },
+  "ENFJ": {
+    "animal": "领队金毛",
+    "emoji": "🐕",
+    "group": "diplomat",
+    "colors": {
+      "main": "#4DC98F",
+      "bg": "#D4F2E2",
+      "body": "#F0C070",
+      "shade": "#D9A455",
+      "accent": "#FF8A6B"
+    },
+    "elements": {
+      "ears": "dogFloppy",
+      "eye": "happy",
+      "brow": "none",
+      "mouth": "bigSmile",
+      "acc": "scarf",
+      "pattern": "glow",
+      "blush": true
+    },
+    "trait": "金毛的号召力与照顾欲，Fe 主导的凝聚力"
+  },
+  "ENFP": {
+    "animal": "快乐小狗",
+    "emoji": "🐶",
+    "group": "diplomat",
+    "colors": {
+      "main": "#8FE3BE",
+      "bg": "#E2F8EE",
+      "body": "#F5D9A8",
+      "shade": "#DCBC84",
+      "accent": "#FF9EC4"
+    },
+    "elements": {
+      "ears": "dogUp",
+      "eye": "star",
+      "brow": "none",
+      "mouth": "tongue",
+      "acc": "none",
+      "pattern": "confetti",
+      "blush": true
+    },
+    "trait": "摇尾巴的快乐小狗，Ne 的热情四溢与三分钟热度"
+  },
+  "ISTJ": {
+    "animal": "档案乌龟",
+    "emoji": "🐢",
+    "group": "sentinel",
+    "colors": {
+      "main": "#5B9BD5",
+      "bg": "#D8E8F7",
+      "body": "#8FC98F",
+      "shade": "#6FA86F",
+      "accent": "#C89B72"
+    },
+    "elements": {
+      "ears": "none",
+      "eye": "calm",
+      "brow": "worried",
+      "mouth": "flat",
+      "acc": "shell",
+      "pattern": "grid",
+      "blush": false
+    },
+    "trait": "乌龟慢而稳、壳如档案柜，Si 的秩序感与可靠"
+  },
+  "ISFJ": {
+    "animal": "暖手考拉",
+    "emoji": "🐨",
+    "group": "sentinel",
+    "colors": {
+      "main": "#7FB8E8",
+      "bg": "#DFEDFA",
+      "body": "#B8C4CF",
+      "shade": "#98A4AF",
+      "accent": "#FF9EC4"
+    },
+    "elements": {
+      "ears": "koala",
+      "eye": "gentle",
+      "brow": "none",
+      "mouth": "gentle",
+      "acc": "blanket",
+      "pattern": "hearts",
+      "blush": true
+    },
+    "trait": "考拉抱树不放，Si+Fe 的默默守护与念旧"
+  },
+  "ESTJ": {
+    "animal": "主管灰狼",
+    "emoji": "🐺",
+    "group": "sentinel",
+    "colors": {
+      "main": "#4A88C8",
+      "bg": "#D4E4F5",
+      "body": "#9AA8B8",
+      "shade": "#7A8898",
+      "accent": "#C4453C"
+    },
+    "elements": {
+      "ears": "wolf",
+      "eye": "sharp",
+      "brow": "angry",
+      "mouth": "flat",
+      "acc": "tie",
+      "pattern": "lines",
+      "blush": false
+    },
+    "trait": "狼群的纪律与领导性，Te+Si 的强执行力"
+  },
+  "ESFJ": {
+    "animal": "张罗小蜜蜂",
+    "emoji": "🐝",
+    "group": "sentinel",
+    "colors": {
+      "main": "#9BCBF0",
+      "bg": "#E4F0FB",
+      "body": "#FFD84D",
+      "shade": "#E0BB35",
+      "accent": "#2B2233"
+    },
+    "elements": {
+      "ears": "antenna",
+      "eye": "happy",
+      "brow": "none",
+      "mouth": "bigSmile",
+      "acc": "beeStripe",
+      "pattern": "hexagon",
+      "blush": true
+    },
+    "trait": "蜜蜂的社群性与勤劳，Fe 的人际张罗"
+  },
+  "ISTP": {
+    "animal": "拆机狸花猫",
+    "emoji": "🐱",
+    "group": "explorer",
+    "colors": {
+      "main": "#E8A44D",
+      "bg": "#FBEBD4",
+      "body": "#C9A882",
+      "shade": "#A88A66",
+      "accent": "#8FC9F5"
+    },
+    "elements": {
+      "ears": "cat",
+      "eye": "oneClosed",
+      "brow": "flat",
+      "mouth": "w",
+      "acc": "wrench",
+      "pattern": "parts",
+      "blush": false
+    },
+    "trait": "猫的独立与动手欲，Ti+Se 的实操派"
+  },
+  "ISFP": {
+    "animal": "画画小鹿",
+    "emoji": "🦌",
+    "group": "explorer",
+    "colors": {
+      "main": "#F0BC7A",
+      "bg": "#FCF0DF",
+      "body": "#D9A87F",
+      "shade": "#BC8A62",
+      "accent": "#FF9EC4"
+    },
+    "elements": {
+      "ears": "deer",
+      "eye": "lashes",
+      "brow": "none",
+      "mouth": "small",
+      "acc": "flower",
+      "pattern": "paint",
+      "blush": true
+    },
+    "trait": "鹿的安静与审美天赋，Fi+Se 的生活艺术家"
+  },
+  "ESTP": {
+    "animal": "冲刺猎豹",
+    "emoji": "🐆",
+    "group": "explorer",
+    "colors": {
+      "main": "#F09340",
+      "bg": "#FDE6CE",
+      "body": "#F0B860",
+      "shade": "#D49A45",
+      "accent": "#2B2233"
+    },
+    "elements": {
+      "ears": "cat",
+      "eye": "bright",
+      "brow": "raised",
+      "mouth": "grin",
+      "acc": "sunglasses",
+      "pattern": "bolt",
+      "blush": false
+    },
+    "trait": "猎豹的瞬间爆发力，Se 主导的先做再说"
+  },
+  "ESFP": {
+    "animal": "派对海豚",
+    "emoji": "🐬",
+    "group": "explorer",
+    "colors": {
+      "main": "#FFCB85",
+      "bg": "#FFF0DC",
+      "body": "#8FC9F5",
+      "shade": "#6FA8D4",
+      "accent": "#FF9EC4"
+    },
+    "elements": {
+      "ears": "fin",
+      "eye": "star",
+      "brow": "none",
+      "mouth": "open",
+      "acc": "lei",
+      "pattern": "notes",
+      "blush": true
+    },
+    "trait": "海豚爱玩爱互动，Se+Fi 的天生舞台感"
+  }
+}

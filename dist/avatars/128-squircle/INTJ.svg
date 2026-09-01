@@ -1,0 +1,40 @@
+<svg viewBox="0 0 512 512" width="128" height="128" xmlns="http://www.w3.org/2000/svg" class="ani-av" data-type="INTJ">
+<defs><clipPath id="clip-INTJ-squircle-1y8bz"><rect x="0" y="0" width="512" height="512" rx="112"/></clipPath></defs>
+<g clip-path="url(#clip-INTJ-squircle-1y8bz)">
+  <rect width="512" height="512" fill="#E4DEF8"/>
+  
+
+  <!-- 身体（肩部露出下缘）-->
+  <path d="M256 336c-72 0-130 44-130 100v76h260v-76c0-56-58-100-130-100z"
+        fill="#9D8FE0" stroke="#2B2233" stroke-width="10" stroke-linejoin="round"/>
+
+  
+  
+
+  <!-- 翅膀在头后 -->
+  
+
+  <!-- 耳朵 -->
+  <g fill="#9D8FE0" stroke="#2B2233" stroke-width="10" stroke-linejoin="round"><path d="M150 138c-10-34 4-58 18-66-2 26 8 42 20 52z"/>
+      <path d="M362 138c10-34-4-58-18-66 2 26-8 42-20 52z"/></g>
+
+  <!-- 头 -->
+  <ellipse cx="256" cy="236" rx="132" ry="122" fill="#9D8FE0" stroke="#2B2233" stroke-width="10" stroke-linejoin="round"/>
+
+  <!-- 面部浅色区 -->
+  <ellipse cx="256" cy="262" rx="96" ry="82" fill="#fff" opacity=".26"/>
+
+  
+  
+
+  <g stroke="#2B2233" stroke-width="11" stroke-linecap="round" fill="none"><path d="M188 210h44"/><path d="M280 210h44"/></g>
+  <g><circle cx="212" cy="248" r="20" fill="#2B2233"/><circle cx="219" cy="240" r="6.5" fill="#fff"/>
+      <path d="M280 248c10 11 32 11 42 0" stroke="#2B2233" stroke-width="11" stroke-linecap="round" fill="none"/></g>
+  <path d="M242 290l14 24 14-24z" fill="#FFD84D" stroke="#2B2233" stroke-width="9" stroke-linejoin="round"/>
+
+  <!-- 前景配饰 -->
+  <g stroke="#2B2233" stroke-width="10" stroke-linejoin="round"><rect x="336" y="356" width="104" height="34" rx="16" fill="#8FC9F5"/>
+      <path d="M356 356v34M382 356v34M408 356v34" stroke-width="7"/></g>
+</g>
+<rect x="8" y="8" width="496" height="496" rx="106" fill="none" stroke="#2B2233" stroke-width="16"/>
+</svg>
