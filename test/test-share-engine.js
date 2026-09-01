@@ -28,9 +28,19 @@ const D = api.SHARE_COPY_DATA;
 console.log('\n========== 1. 模板库规模 ==========');
 const st = api.shareCopyStats();
 console.log('  ' + JSON.stringify(st.perStyle));
-ok(st.styleCount === 5, '5 类风格，实得 ' + st.styleCount);
+// 6 类 = 原 5 类 + contrast（反差式）。反差式为「三维说法互相打架」的场景而设：
+// 一致性低时，「两个体系各执一词」才是这个人最鲜明的特点，不该被回避。
+ok(st.styleCount === 6, '6 类风格（含反差式），实得 ' + st.styleCount);
+ok(!!D.styles.contrast, '存在 contrast（反差式）风格');
+// 反差式每个模板都必须依赖分歧变量 —— 否则在无分歧场景下会输出「差了 undefined 分」
+const conBad = D.styles.contrast.templates.filter(t =>
+  !(t.needs || []).some(n => n.startsWith('split') || n === 'contrastLine'));
+ok(conBad.length === 0, '反差式模板全部依赖分歧变量' +
+   (conBad.length ? '，缺: ' + conBad.map(t => t.id).join(',') : ''));
 ok(st.templateTotal >= 24, '模板总数 ≥24，实得 ' + st.templateTotal);
-ok(st.badgeRules === 9, '9 条徽章规则，实得 ' + st.badgeRules);
+// 10 条 = 原 9 条 + big-split（反差 {splitGap} 分）。一致性低的用户需要一条
+// 能炫耀的徽章：原本只有「多面人格」这种描述性标签，没有可晒的数字。
+ok(st.badgeRules === 10, '10 条徽章规则，实得 ' + st.badgeRules);
 ok(st.themes === 4, '4 套配色主题，实得 ' + st.themes);
 
 console.log('\n========== 2. 模板 ID 唯一性与 needs 合法性 ==========');
@@ -276,7 +286,43 @@ ok(!ctaCands.some(c => c.text.includes('{url}')), '无 {url} 占位符残留');
 // 加了 URL 后仍不能超长
 ok(!ctaCands.some(c => c.len > 120), '拼接链接后仍未超朋友圈上限');
 
-console.log('\n========== 12. 品牌信息 ==========');
+console.log('\n========== 12. 反差场景（INFP + 白羊座）==========');
+// 真实用户案例：INFP-A + 白羊座，一致性 37 分，外向性分歧 46 分。
+// 改造前这里会输出「均衡型」+ 自相矛盾的两条徽章，用户说「没有 get 到我的点」。
+const aries = api.getZodiacSign(4, 10);
+const inpC = { mbti:{type:'INFP',identity:'A'}, zodiac:aries, bazi:null };
+const synC = api.synthesize(inpC);
+const profC = api.buildProfile(synC);
+console.log('  一致性 ' + synC.overall + '%（' + synC.level.label + '）');
+console.log('  原型 ' + profC.archetype.face + ' ' + profC.archetype.name + ' — ' + profC.archetype.title);
+
+ok(synC.conflicts.length > 0, 'INFP + 白羊确实存在分歧轴');
+ok(profC.archetype.contrast === true, '命中反差型原型，实得「' + profC.archetype.name + '」');
+ok(profC.archetype.name !== '均衡型', '不再是「均衡型」');
+ok(!!profC.archetype.contrastLine, '反差型原型带 contrastLine 金句');
+
+// 徽章不能自相矛盾：多面人格（分歧）与均衡（无分歧）互斥
+const varsC = api.buildVars(synC, profC, inpC);
+const badgesC = api.calcBadges(varsC);
+badgesC.forEach(b => console.log('    ' + b.icon + ' ' + b.label + ' — ' + b.sub));
+const hasSplit = badgesC.some(b => b.id === 'split-soul');
+const hasBalanced = badgesC.some(b => b.id === 'balanced');
+ok(!(hasSplit && hasBalanced), '「多面人格」与「均衡」不再同时出现（互斥）');
+
+// 反差式文案必须出现，且不能提「均衡型」
+const candsC = api.generateCopyCandidates(synC, profC, inpC);
+const conC = candsC.find(c => c.styleKey === 'contrast');
+ok(!!conC, '反差式文案已生成');
+ok(!candsC.some(c => c.text.includes('均衡型')), '候选文案中不再出现「均衡型」');
+ok(candsC.every(c => !/\{\w+\}/.test(c.text)), '全部候选无未替换占位符');
+// 分歧变量必须真的插值进去了，而不是空字符串
+if (conC) {
+  console.log('  【反差式】' + conC.len + '字 [' + conC.templateId + ']');
+  conC.text.split('\n').forEach(l => console.log('    ' + l));
+  ok(/\d/.test(conC.text), '反差式文案含具体分歧数值');
+}
+
+console.log('\n========== 13. 品牌信息 ==========');
 ok(!!D.brand.name && !!D.brand.en && !!D.brand.tagline && !!D.brand.mark, '品牌四要素齐备');
 console.log('  ' + D.brand.mark + ' ' + D.brand.name + ' / ' + D.brand.en + ' — ' + D.brand.tagline);
 

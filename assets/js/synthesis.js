@@ -425,6 +425,58 @@ function matchArchetype(vector) {
   return { ...PROFILE_DATA.fallbackArchetype, matched: false };
 }
 
+/* ============================================================
+ *  反差型原型匹配
+ *
+ *  ⚠️ 为什么需要这个
+ *
+ *  平均向量会把两个极端互相抵消：INFP 的外向性 32 与白羊座的 78，
+ *  平均后是 55 —— 恰好落在「中间档」。于是 matchArchetype 找不到
+ *  两条非中间档的轴，只能回退到「均衡型」，输出「你没有特别极端的
+ *  特质，鲜明标签不明显」。
+ *
+ *  但事实恰恰相反：46 分的落差说明这个人身上有强烈反差，
+ *  那才是他最鲜明、最值得分享的标签。取平均 = 把最有张力的人
+ *  说成最无聊的人。
+ *
+ *  所以当存在显著分歧时，改用「分歧轴」驱动匹配 —— 不看平均值，
+ *  看两个体系在哪里打架，然后把「打架」本身命名成一个原型。
+ * ============================================================ */
+
+/**
+ * 按最大分歧轴匹配反差型原型
+ *
+ * @param {Object} syn synthesize() 的返回值
+ * @returns {Object|null} 匹配不到返回 null，由调用方回退到常规匹配
+ */
+function matchContrastArchetype(syn) {
+  const list = PROFILE_DATA.contrastArchetypes;
+  if (!list || !list.length) return null;
+  if (!syn.conflicts || !syn.conflicts.length) return null;
+
+  // conflicts 已按 gap 降序排好，取第一个 = 分歧最激烈的轴
+  const top = syn.conflicts[0];
+  const onAxis = list.filter(a => (a.keys || []).includes(top.axis.key));
+  if (!onAxis.length) return null;
+
+  // 优先按 gapMin 分档：选满足「分歧足够大」的最高档，
+  // 让「温和反差」与「强烈反差」落到不同原型上。
+  // gapMin 是可选字段，数据里没写时一律当 0，顺序无关。
+  const qualified = onAxis.filter(a => (a.gapMin || 0) <= top.gap);
+  const pool = qualified.length ? qualified : onAxis;
+  const pick = pool.sort((a, b) => (b.gapMin || 0) - (a.gapMin || 0))[0];
+
+  return {
+    ...pick,
+    matched: true,
+    contrast: true,
+    splitAxis: top.axis,
+    splitGap: top.gap,
+    splitHigh: top.high,   // { label: 维度名, val: 分值 }
+    splitLow: top.low
+  };
+}
+
 /**
  * 生成完整性格总结
  *
@@ -455,7 +507,9 @@ function buildProfile(syn) {
   });
 
   // ---------- 人格原型 ----------
-  const archetype = matchArchetype(v);
+  // 有显著分歧时优先走反差型原型：平均向量会把两个极端抹平，
+  // 照它匹配只会得到「均衡型」，等于把最有张力的人说成最无聊的人。
+  const archetype = matchContrastArchetype(syn) || matchArchetype(v);
 
   // ---------- 整体叙述（取非中间档的轴，按突出程度排序）----------
   const salient = [...axisDetails]
@@ -467,7 +521,17 @@ function buildProfile(syn) {
     ? salient.slice(0, 3)
     : [...axisDetails].sort((a, b) => Math.abs(b.val - 50) - Math.abs(a.val - 50)).slice(0, 2);
 
-  const narrative = narrativeSource.map(d => d.narrative).join('。') + '。';
+  let narrative = narrativeSource.map(d => d.narrative).join('。') + '。';
+
+  // 有分歧时补一句反差钩子：把「两个体系打架」翻译成「你这个人有层次」。
+  // 旧输出只有一条轴的内容（其余全被平均成中间档），单薄到没法分享。
+  if (syn.conflicts && syn.conflicts.length) {
+    const t = syn.conflicts[0];
+    narrative += `而在「${t.axis.cn}」上，两个体系给出了几乎相反的答案：` +
+      `${t.high.label}把你放在${t.high.val}分的「${t.axis.high}」一端，` +
+      `${t.low.label}则把你放在${t.low.val}分的「${t.axis.low}」一端。` +
+      `这不是哪边测错了，更像是你在不同情境下真的会长出不同的样子。`;
+  }
 
   // ---------- 分类汇总 ----------
   const workStyle = narrativeSource.slice(0, 2).map(d => d.work);
@@ -509,16 +573,23 @@ function buildProfile(syn) {
   const tensions = syn.conflicts.slice(0, 2).map(c => ({
     axis: c.axis,
     gap: c.gap,
-    text: `在「${c.axis.cn}」上，${c.high.label}与${c.low.label}的说法相差 ${c.gap} 分。` +
-          `这类矛盾往往对应你在不同情境下的不同侧面——比如工作时与私下时判若两人。`
+    text: `在「${c.axis.cn}」上，${c.high.label}与${c.low.label}各执一词，相差 ${c.gap} 分。` +
+          `这种落差不是缺陷——它意味着你能按场合切换状态，比只有一个标签的人多出一整套应对方式。`
   }));
 
   // ---------- 一句话概括 ----------
-  // 只用非中间档的轴。若不足两条，改用「均衡」表述——
-  // 否则会输出「居中、居中，是你身上最明显的两个特点」这种废话。
   const poles = salient.slice(0, 2).map(d => d.pole);
   let oneLiner;
-  if (poles.length >= 2) {
+
+  if (syn.conflicts && syn.conflicts.length) {
+    // 有分歧时，最鲜明的标签就是「反差」本身，而不是某个特质。
+    // 旧逻辑会输出「求新好奇是你最鲜明的特点，其余特质都比较居中」——
+    // 听起来像「你没什么特点」，而这恰恰与事实相反。
+    const t = syn.conflicts[0];
+    oneLiner = `最鲜明的标签不是某个特质，而是${t.axis.cn}上 ${t.gap} 分的落差——` +
+               `${t.high.label}说你「${t.axis.high}」，${t.low.label}说你「${t.axis.low}」，` +
+               `两个都在你身上成立。`;
+  } else if (poles.length >= 2) {
     oneLiner = `${poles[0]}、${poles[1]}，是你身上最明显的两个特点。`;
   } else if (poles.length === 1) {
     oneLiner = `${poles[0]}是你最鲜明的特点，其余特质都比较居中。`;
@@ -526,9 +597,28 @@ function buildProfile(syn) {
     oneLiner = '你的五项特质都落在中间地带，是相当均衡的类型。';
   }
 
+  // ---------- 短版一句话（供分享文案用）----------
+  // 完整版要 60+ 字，而朋友圈折叠阈值 112 字、CTA 链接还要占约 40 字符。
+  // 文案里塞完整版会把链接直接挤掉，等于断了传播闭环。
+  // 结果页要表现力，文案要传播力 —— 两个场景两套长度，各自满足。
+  // 下界也要守住：有模板（如 min-03）整条文案就是 {oneLiner} 本身，
+  // 短到「果断、周密」这种 5 字会被判为无效文案。故一律补成完整短句。
+  let oneLinerShort;
+  if (syn.conflicts && syn.conflicts.length) {
+    const t = syn.conflicts[0];
+    oneLinerShort = `${t.axis.cn}上 ${t.gap} 分的反差`;
+  } else if (poles.length >= 2) {
+    oneLinerShort = `${poles[0]}、${poles[1]}，就是我`;
+  } else if (poles.length === 1) {
+    oneLinerShort = `我是${poles[0]}的人`;
+  } else {
+    oneLinerShort = '相当均衡的一个人';
+  }
+
   return {
     archetype,
     oneLiner,
+    oneLinerShort,
     narrative,
     axisDetails,
     salientCount: salient.length,

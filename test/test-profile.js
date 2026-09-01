@@ -165,6 +165,66 @@ const arcBad = api.PROFILE_DATA.archetypes.filter(a =>
   !a.name || !a.face || !a.title || !a.desc || !Array.isArray(a.keys) || a.keys.length !== 2);
 ok(arcBad.length === 0, '16 个原型字段完整（各含 2 个匹配键）');
 
+console.log('\n========== 8. 反差型原型（contrastArchetypes）==========');
+// 存在分歧时由最大分歧轴驱动匹配。若某轴没有对应原型，该轴的分歧者会
+// 回退到「均衡型」—— 而那恰恰是最有特点、最想分享的一批人。
+const CA = api.PROFILE_DATA.contrastArchetypes;
+ok(Array.isArray(CA) && CA.length >= 10, '反差型原型库存在且 ≥10 个，实得 ' + (CA ? CA.length : 0));
+
+const axisCov = {};
+CA.forEach(a => (a.keys || []).forEach(k => { axisCov[k] = (axisCov[k] || 0) + 1; }));
+api.AXIS_KEYS.forEach(k => {
+  ok((axisCov[k] || 0) >= 2, '轴 ' + k + ' 至少 2 个反差原型，实得 ' + (axisCov[k] || 0));
+});
+
+const badKey = CA.filter(a => (a.keys || []).some(k => !api.AXIS_KEYS.includes(k)));
+ok(badKey.length === 0, '所有 keys 都是合法 axis key' +
+   (badKey.length ? '，非法: ' + badKey.map(a => a.name).join(',') : ''));
+
+ok(CA.every(a => a.name && a.face && a.title && a.desc && a.contrastLine), '反差原型字段完整');
+
+const shortDesc = CA.filter(a => a.desc.length < 50 || a.desc.length > 110);
+ok(shortDesc.length === 0, 'desc 长度在 50-110 字之间' +
+   (shortDesc.length ? '，越界: ' + shortDesc.map(a => a.name + '(' + a.desc.length + ')').join(',') : ''));
+
+const badLine = CA.filter(a => a.contrastLine.length < 12 || a.contrastLine.length > 28);
+ok(badLine.length === 0, 'contrastLine 长度在 12-28 字之间' +
+   (badLine.length ? '，越界: ' + badLine.map(a => a.name + '(' + a.contrastLine.length + ')').join(',') : ''));
+
+const dupName = CA.filter(a => defined.includes(a.name));
+ok(dupName.length === 0, '反差原型未与常规原型重名' +
+   (dupName.length ? '，重名: ' + dupName.map(a => a.name).join(',') : ''));
+
+// 档位连续：从 30 到 60 每一档都要有轴能接住，不能出现空档
+[30, 40, 50, 60].forEach(g => {
+  const covered = api.AXIS_KEYS.filter(k =>
+    CA.some(a => (a.keys || []).includes(k) && (a.gapMin || 0) <= g));
+  ok(covered.length === 5, '分差 ' + g + ' 时 5 个轴全部有可匹配原型，实得 ' + covered.length);
+});
+
+// 死档检查：gapMin 必须落在真实可达的分差区间内，否则该原型永远匹配不到。
+// 这里不写死数字，而是从真实数据反推各轴可达上限（16 型 × A/T × 12 星座 × 12 组八字），
+// 这样以后调权重或改向量，断言会跟着数据走而不是失效。
+const ceil = {};
+api.AXIS_KEYS.forEach(k => { ceil[k] = 0; });
+const zVecs = [];
+for (let m = 1; m <= 12; m++) zVecs.push(api.getZodiacSign(m, 15).data.vector);
+const bVecs = [];
+[[1990,3,3,8],[1995,8,15,14],[2000,12,1,3],[1975,6,6,20],[1988,1,20,0]].forEach(([y,mo,d,h]) => {
+  bVecs.push(api.calcBazi(y, mo, d, h).dayMaster.vector);
+});
+Object.keys(api.TYPES).forEach(t => ['A','T'].forEach(id => {
+  const mv = api.synthesize({ mbti:{type:t,identity:id}, zodiac:api.getZodiacSign(6,15), bazi:null }).dims[0].vector;
+  zVecs.concat(bVecs).forEach(ov => api.AXIS_KEYS.forEach(k => {
+    const gap = Math.abs((mv[k] ?? 50) - (ov[k] ?? 50));
+    if (gap > ceil[k]) ceil[k] = gap;
+  }));
+}));
+console.log('  各轴实测最大分差: ' + JSON.stringify(ceil));
+const deadTier = CA.filter(a => (a.keys || []).some(k => (a.gapMin || 0) > ceil[k]));
+ok(deadTier.length === 0, '无死档（每档 gapMin 都在可达区间内）' +
+   (deadTier.length ? '，不可达: ' + deadTier.map(a => a.name + '(gapMin' + a.gapMin + ')').join(',') : ''));
+
 console.log('\n' + '='.repeat(48));
 console.log('  通过 ' + pass + ' 项，失败 ' + fail + ' 项');
 console.log('='.repeat(48));

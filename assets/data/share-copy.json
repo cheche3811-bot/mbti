@@ -1,8 +1,8 @@
 {
   "_meta": {
     "file": "share-copy.json",
-    "purpose": "分享文案模板库。5 类风格 × 多套模板，支持变量插值与轮换去重。",
-    "designNote": "模板化的核心是变量丰富度。每套模板只声明结构，具体内容由用户数据填充，因此同一模板给不同用户看到的结果差异很大。",
+    "purpose": "分享文案模板库。6 类风格 × 多套模板，支持变量插值与轮换去重。",
+    "designNote": "模板化的核心是变量丰富度。每套模板只声明结构，具体内容由用户数据填充，因此同一模板给不同用户看到的结果差异很大。contrast（反差式）是专为「三维说法互相打架」的场景设计的：它不回避分歧，而是把「两套体系各执一词」本身当卖点讲——反差感比一致性更像一个人，也更容易引发评论区互动。",
     "lengthGuide": {
       "wechat_moments": {
         "max": 120,
@@ -50,7 +50,14 @@
       "secondTraitVal": "第二突出特质分值",
       "topAxis": "最突出特质所属轴名",
       "rarityNum": "人口占比数值版（用于条件比较）",
-      "allMid": "五维是否全部落在中段"
+      "allMid": "五维是否全部落在中段",
+      "splitAxis": "分歧最大的特质轴中文名，如「外向性」",
+      "splitGap": "该轴上的分歧分值差，如 46",
+      "splitHighLabel": "分歧轴高分端的中文标签，如「外向活跃」",
+      "splitLowLabel": "分歧轴低分端的中文标签，如「沉静内敛」",
+      "splitHighWho": "给出高分说法的维度名，如「星座」",
+      "splitLowWho": "给出低分说法的维度名，如「MBTI」",
+      "contrastLine": "反差型原型的金句（contrastArchetypes 的 contrastLine）"
     }
   },
   "styles": {
@@ -68,8 +75,10 @@
         },
         {
           "id": "sus-02",
-          "text": "48 道题 + 星座 + 生辰八字，三方交叉验证之后，我看到了一个不太想承认但确实是我的答案。\n\n「{archetype}」",
-          "needs": []
+          "text": "{dimList} 交叉验证之后，我看到了一个不太想承认、但确实是我的答案。\n\n「{archetype}」",
+          "needs": [
+            "dimList"
+          ]
         },
         {
           "id": "sus-03",
@@ -80,8 +89,10 @@
         },
         {
           "id": "sus-04",
-          "text": "最准的一句是这个：\n\n「{oneLiner}」\n\n不是星座，是三个维度一起算出来的。有点服。",
-          "needs": []
+          "text": "最准的一句是这个：\n\n「{oneLiner}」\n\n不是某一套说了算，是 {dimList} 交叉算出来的。有点服。",
+          "needs": [
+            "dimList"
+          ]
         },
         {
           "id": "sus-05",
@@ -143,8 +154,9 @@
         },
         {
           "id": "res-06",
-          "text": "三个维度都说我「{topTrait}」。\n\n三套完全不同的体系，居然在这一点上达成了共识。那大概是真的了。",
+          "text": "{dimList} 都提到我「{topTrait}」。\n\n几套完全不同的体系，居然在这一点上说得差不多。那大概是真的了。",
           "needs": [
+            "dimList",
             "topTrait"
           ]
         }
@@ -169,8 +181,9 @@
         },
         {
           "id": "hum-03",
-          "text": "MBTI 说我这样，星座说我那样，八字说我又是另一样。\n\n三个吵了半天，最后吻合度 {score}%。行吧，各让一步。",
+          "text": "{dimList}，几个说法吵了半天，最后吻合度 {score}%。行吧，各让一步。",
           "needs": [
+            "dimList",
             "score"
           ]
         },
@@ -223,8 +236,9 @@
         },
         {
           "id": "flx-03",
-          "text": "MBTI + 星座 + 八字，三套体系交叉验证：吻合度 {score}%，{scoreLabel}。\n\n我这个人，还挺自洽的。",
+          "text": "{dimList} 交叉验证：吻合度 {score}%，{scoreLabel}。\n\n我这个人，还挺自洽的。",
           "needs": [
+            "dimList",
             "score",
             "scoreLabel"
           ]
@@ -240,9 +254,115 @@
         },
         {
           "id": "flx-05",
-          "text": "完整版三维报告已解锁 ✅\n{dimList}\n\n结论：「{archetype}」，{oneLiner}",
+          "text": "{dimCount} 个维度交叉完成 ✅\n{dimList}\n\n结论：「{archetype}」，{oneLiner}",
           "needs": [
+            "dimCount",
             "dimList"
+          ]
+        }
+      ]
+    },
+    "contrast": {
+      "name": "反差式",
+      "icon": "⚡",
+      "desc": "把两套体系的打架讲成卖点，反差本身就是标签",
+      "templates": [
+        {
+          "id": "con-01",
+          "text": "两套体系在我身上吵起来了。\n{splitHighWho}说我「{splitHighLabel}」，{splitLowWho}说我「{splitLowLabel}」，差 {splitGap} 分。\n\n两个我都认。",
+          "needs": [
+            "splitHighWho",
+            "splitLowWho",
+            "splitHighLabel",
+            "splitLowLabel",
+            "splitGap"
+          ]
+        },
+        {
+          "id": "con-02",
+          "text": "{splitLowWho}说我「{splitLowLabel}」，{splitHighWho}说我「{splitHighLabel}」，差 {splitGap} 分。\n\n我以前觉得这是矛盾，现在觉得这是配置。",
+          "needs": [
+            "splitHighWho",
+            "splitLowWho",
+            "splitHighLabel",
+            "splitLowLabel",
+            "splitGap"
+          ]
+        },
+        {
+          "id": "con-03",
+          "text": "测出来我在「{splitAxis}」上差了 {splitGap} 分。\n\n认识我的人应该都见过这两面，只是不同时出现。",
+          "needs": [
+            "splitAxis",
+            "splitGap"
+          ]
+        },
+        {
+          "id": "con-04",
+          "text": "我是「{archetype}」——{archetypeTitle}。\n\n{splitHighWho}和{splitLowWho}在「{splitAxis}」上差了 {splitGap} 分。\n\n反差这么大的还有谁？",
+          "needs": [
+            "archetype",
+            "archetypeTitle",
+            "splitHighWho",
+            "splitLowWho",
+            "splitAxis",
+            "splitGap"
+          ]
+        },
+        {
+          "id": "con-05",
+          "text": "「{contrastLine}」\n\n——{splitHighWho}说我{splitHighLabel}，{splitLowWho}说我{splitLowLabel}，差了 {splitGap} 分。",
+          "needs": [
+            "contrastLine",
+            "splitHighWho",
+            "splitLowWho",
+            "splitHighLabel",
+            "splitLowLabel",
+            "splitGap"
+          ]
+        },
+        {
+          "id": "con-06",
+          "text": "有个数字我一直没想通：{splitGap}。\n\n同一个我，{splitHighWho}说{splitHighLabel}，{splitLowWho}说{splitLowLabel}——差这么多。",
+          "needs": [
+            "splitGap",
+            "splitHighWho",
+            "splitLowWho",
+            "splitHighLabel",
+            "splitLowLabel"
+          ]
+        },
+        {
+          "id": "con-07",
+          "text": "{splitLowWho}说我{splitLowLabel}，{splitHighWho}说我{splitHighLabel}。\n\n差 {splitGap} 分，愣是同一个人。\n\n我是「{archetype}」。",
+          "needs": [
+            "splitHighWho",
+            "splitLowWho",
+            "splitHighLabel",
+            "splitLowLabel",
+            "splitGap",
+            "archetype"
+          ]
+        },
+        {
+          "id": "con-08",
+          "text": "{splitLowWho}说我{splitLowLabel}，{splitHighWho}说我{splitHighLabel}。\n\n两个都对。{archetypeTitle}——说的大概就是这个。",
+          "needs": [
+            "splitHighWho",
+            "splitLowWho",
+            "splitHighLabel",
+            "splitLowLabel",
+            "archetypeTitle"
+          ]
+        },
+        {
+          "id": "con-09",
+          "text": "{splitHighWho}说我{splitHighLabel}，{splitLowWho}说我{splitLowLabel}。\n\n我以前总觉得自己前后矛盾，原来两套说法都对——只是不同时候的我。",
+          "needs": [
+            "splitHighWho",
+            "splitLowWho",
+            "splitHighLabel",
+            "splitLowLabel"
           ]
         }
       ]
@@ -304,7 +424,7 @@
     ]
   },
   "badges": {
-    "_note": "成就徽章。按条件动态解锁，用于分享图与炫耀式文案。",
+    "_note": "成就徽章。按条件动态解锁，用于分享图与炫耀式文案。⚠️ balanced（traitSpan<=28）依赖 share-engine.js 在存在分歧轴时把 traitSpan 置为 999：平均向量会把冲突两端抹平（32 与 78 平均成 55），跨度虚低，否则「五维均衡」会与「多面人格」成对出现、同一屏自相矛盾。",
     "rules": [
       {
         "id": "ultra-rare",
@@ -347,9 +467,18 @@
         "cond": "score<45",
         "icon": "🎭",
         "label": "多面人格",
-        "sub": "三套体系分歧明显",
+        "sub": "反差强烈，不止一副面貌",
         "color": "#EA7BA8",
         "weight": 85
+      },
+      {
+        "id": "big-split",
+        "cond": "splitGap>=40",
+        "icon": "⚡",
+        "label": "反差 {splitGap} 分",
+        "sub": "{splitAxis}上两套说法相反",
+        "color": "#EA7BA8",
+        "weight": 87
       },
       {
         "id": "extreme-trait",
@@ -382,8 +511,8 @@
         "id": "balanced",
         "cond": "traitSpan<=28",
         "icon": "⚖️",
-        "label": "罕见均衡型",
-        "sub": "五维差异极小",
+        "label": "五维均衡",
+        "sub": "各项都不走极端",
         "color": "#C9C4D2",
         "weight": 82
       }

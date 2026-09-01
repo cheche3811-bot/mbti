@@ -38,7 +38,9 @@ function buildVars(syn, prof, input) {
 
   v.archetype = arc.name;
   v.archetypeTitle = arc.title;
-  v.oneLiner = prof.oneLiner;
+  // 文案一律用短版：完整版 60+ 字会把 CTA 链接挤出朋友圈折叠阈值。
+  // 结果页展示仍用 prof.oneLiner 完整版。
+  v.oneLiner = prof.oneLinerShort || prof.oneLiner;
   v.dimCount = syn.count;
   v.dimList = syn.dims.map(d => d.label).join(' + ');
 
@@ -89,11 +91,41 @@ function buildVars(syn, prof, input) {
   // 冲突轴
   if (syn.conflicts.length) v.conflictAxis = syn.conflicts[0].axis.cn;
 
+  // 反差型原型的金句（contrastArchetypes 的 contrastLine）。
+  // 常规原型没有这个字段，缺失时依赖它的模板会被自动跳过。
+  if (arc.contrastLine) v.contrastLine = arc.contrastLine;
+
+  // ---------- 反差/分歧变量（供「反差叙事」风格文案使用）----------
+  // conflicts 已按 gap 降序，[0] 是分歧最激烈的那条轴。
+  // splitHigh/Low 是维度名（如「星座」「MBTI」），
+  // splitHigh/LowLabel 是该轴两端的中文标签（如「外向活跃」「沉静内敛」）。
+  if (syn.conflicts.length) {
+    const t = syn.conflicts[0];
+    v.conflictCount = syn.conflicts.length;
+    v.splitAxis = t.axis.cn;
+    v.splitGap = t.gap;
+    v.splitHighWho = t.high.label;
+    v.splitLowWho = t.low.label;
+    v.splitHighVal = t.high.val;
+    v.splitLowVal = t.low.val;
+    v.splitHighLabel = t.axis.high;
+    v.splitLowLabel = t.axis.low;
+  } else {
+    v.conflictCount = 0;
+  }
+
   // 五维跨度（供 balanced 徽章）。实测 allMid 几乎不出现，
   // 因为 MBTI 向量本身带方向性，三维平均后仍会偏离中值。
   // 改用「最高分 - 最低分」衡量均衡度，更贴合真实分布。
   v.traitSpan = v.maxTrait - v.minTrait;
   v.allMid = prof.axisDetails.every(d => d.band === 'mid');
+
+  // ⚠️ 有分歧时不得判「均衡型」。
+  // 平均向量会把两个极端抵消（INFP 32 与白羊 78 平均成 55），
+  // 跨度因此变小，于是「罕见均衡型」与「多面人格」同时出现——
+  // 同一屏里两条自相矛盾的徽章。平均后的平淡不等于这个人平淡，
+  // 那恰恰是他身上落差最大的地方。这里置为大值让 balanced 规则落空。
+  if (syn.conflicts.length) v.traitSpan = 999;
 
   return v;
 }
