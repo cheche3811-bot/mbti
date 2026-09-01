@@ -34,6 +34,7 @@ SUITES=(
   test-profile
   test-animals
   test-share-engine
+  test-a11y
   test-e2e
   test-share-layout
   test-card-v2-layout
