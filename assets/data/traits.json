@@ -1,0 +1,117 @@
+{
+  "_meta": {
+    "file": "traits.json",
+    "purpose": "统一特质轴定义 + MBTI 到大五人格的映射系数",
+    "srcId": ["bigfive_costa1992", "mbti_bigfive_mccrae1989"],
+    "designNote": "选用大五人格（Big Five）作为三个维度的公共坐标系，因为它是当代人格心理学中实证支持最充分的框架。MBTI→大五 有实测相关系数支持；星座与八字→大五 属语义归纳，无实证依据。"
+  },
+
+  "axes": [
+    {
+      "key": "extraversion",
+      "cn": "外向性",
+      "en": "Extraversion",
+      "low": "沉静内敛",
+      "high": "外向活跃",
+      "desc": "社交主动性、活力水平与对外部刺激的偏好程度",
+      "color": "#FFD84D",
+      "icon": "🔆"
+    },
+    {
+      "key": "openness",
+      "cn": "开放性",
+      "en": "Openness",
+      "low": "务实守成",
+      "high": "求新好奇",
+      "desc": "对新经验、抽象概念与非常规想法的接纳程度",
+      "color": "#C4A9F5",
+      "icon": "🌀"
+    },
+    {
+      "key": "conscientiousness",
+      "cn": "尽责性",
+      "en": "Conscientiousness",
+      "low": "灵活随性",
+      "high": "自律有序",
+      "desc": "计划性、自我约束与目标坚持程度",
+      "color": "#3F94D6",
+      "icon": "🎯"
+    },
+    {
+      "key": "agreeableness",
+      "cn": "宜人性",
+      "en": "Agreeableness",
+      "low": "直率论理",
+      "high": "体贴共情",
+      "desc": "合作倾向、共情能力与人际温和程度",
+      "color": "#3FB98C",
+      "icon": "🤝"
+    },
+    {
+      "key": "stability",
+      "cn": "情绪稳定性",
+      "en": "Emotional Stability",
+      "low": "敏感起伏",
+      "high": "平稳抗压",
+      "desc": "情绪波动幅度与压力下的恢复能力（神经质的反向维度）",
+      "color": "#FF9EC4",
+      "icon": "⚖️"
+    }
+  ],
+
+  "mbtiMapping": {
+    "_note": "系数来源 McCrae & Costa (1989) 实测相关性。输入为各维度百分比（0-100，100=完全偏向第一字母），输出为该特质轴 0-100 分值。计算方式：50 + (pct - 50) * weight * direction",
+    "_srcId": "mbti_bigfive_mccrae1989",
+    "rules": [
+      {
+        "dim": "EI",
+        "axis": "extraversion",
+        "weight": 0.74,
+        "direction": 1,
+        "note": "E 越强 → 外向性越高，实测 r≈.74"
+      },
+      {
+        "dim": "SN",
+        "axis": "openness",
+        "weight": 0.72,
+        "direction": -1,
+        "note": "N（直觉）越强 → 开放性越高。因 firstPct 代表 S，故方向取反，实测 r≈.72"
+      },
+      {
+        "dim": "TF",
+        "axis": "agreeableness",
+        "weight": 0.44,
+        "direction": -1,
+        "note": "F（情感）越强 → 宜人性越高。因 firstPct 代表 T，故方向取反，实测 r≈.44"
+      },
+      {
+        "dim": "JP",
+        "axis": "conscientiousness",
+        "weight": 0.49,
+        "direction": 1,
+        "note": "J 越强 → 尽责性越高，实测 r≈.49"
+      },
+      {
+        "dim": "AT",
+        "axis": "stability",
+        "weight": 0.68,
+        "direction": 1,
+        "note": "A（自信型）→ 情绪稳定性高。MBTI 原始四维不含此轴，A/T 身份维度概念上对应神经质的反向，采用近似系数"
+      }
+    ]
+  },
+
+  "consistency": {
+    "_note": "一致性等级划分。基于余弦相似度换算的百分比。",
+    "_srcId": "cosine_similarity",
+    "levels": [
+      { "min": 85, "label": "高度一致", "color": "#3FB98C", "desc": "三套描述体系指向高度接近的性格画像" },
+      { "min": 70, "label": "较为一致", "color": "#7DDCC0", "desc": "整体方向吻合，个别特质存在差异" },
+      { "min": 55, "label": "部分一致", "color": "#FFD84D", "desc": "有共同点，但也存在明显分歧的特质" },
+      { "min": 40, "label": "分歧较大", "color": "#F2A63B", "desc": "三套体系给出的画像差异明显" },
+      { "min": 0, "label": "明显冲突", "color": "#EA7BA8", "desc": "描述体系之间存在方向性矛盾" }
+    ],
+    "conflictThreshold": 30,
+    "conflictNote": "单条特质轴上两个维度分值相差超过 30 分即标为冲突点"
+  }
+}

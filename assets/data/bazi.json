@@ -1,0 +1,161 @@
+{
+  "_meta": {
+    "file": "bazi.json",
+    "purpose": "干支五行数据：十天干性格、十二地支、五行属性与旺衰解读",
+    "evidenceLevel": "tradition",
+    "srcId": ["bazi_sanmingtonghui", "bazi_yuanhaiziping", "bazi_ditianshui"],
+    "disclaimer": "生辰八字（子平术）源自宋明以来的中国传统命理学体系，主要典籍为《渊海子平》《三命通会》《滴天髓》。这是中国传统文化的重要组成部分，但其性格与命运推断不属于现代科学范畴，未经实证检验，不具预测效力。本模块的排盘计算（干支纪日换算）是可验证的历法数学，但由此得出的性格解读属传统说法，仅作文化参考。",
+    "calcNote": "日柱推算以 1900-01-31（儒略日 2415051）为甲辰日基准，此换算关系可独立验证。年柱以立春为界（传统命理惯例，非公历元旦）。时柱由日干推算（五鼠遁）。未做真太阳时校正——精确排盘需按出生地经度调整时差（每偏离经度 15° 差 1 小时）并计入均时差（全年 -14 至 +16 分钟），因此时柱为近似值。",
+    "vectorNote": "特质向量（0-100）依据传统典籍中十天干的性格论述语义归纳而来，属启发式赋值，无实证依据，仅用于三维交叉对比的可视化呈现。"
+  },
+
+  "stems": [
+    {
+      "key": "jia", "cn": "甲", "index": 0,
+      "element": "wood", "elementCn": "木", "yin": false, "polarity": "阳",
+      "image": "参天大树",
+      "face": "🌳",
+      "title": "向上生长的开拓者",
+      "desc": "传统命理以甲木喻参天之木：性格正直，有主见与开创意识，做事讲原则、不喜迂回。责任心重，愿意承担，但有时失于灵活，遇阻不易转弯。",
+      "strengths": ["正直有原则", "开拓进取", "责任感强", "意志坚定"],
+      "weakness": ["不够灵活", "固执己见", "不善低头"],
+      "vector": { "extraversion": 62, "openness": 58, "conscientiousness": 78, "agreeableness": 52, "stability": 62 }
+    },
+    {
+      "key": "yi", "cn": "乙", "index": 1,
+      "element": "wood", "elementCn": "木", "yin": true, "polarity": "阴",
+      "image": "藤蔓花草",
+      "face": "🌿",
+      "title": "柔韧顺势的生存者",
+      "desc": "传统命理以乙木喻藤蔓花草：柔中带韧，善于适应环境、借力而行。为人温和有耐性，懂得迂回，但主见相对不强，容易受外界影响。",
+      "strengths": ["适应力强", "温和有耐性", "善于借力", "韧性足"],
+      "weakness": ["主见偏弱", "易受影响", "有时优柔"],
+      "vector": { "extraversion": 48, "openness": 65, "conscientiousness": 55, "agreeableness": 75, "stability": 48 }
+    },
+    {
+      "key": "bing", "cn": "丙", "index": 2,
+      "element": "fire", "elementCn": "火", "yin": false, "polarity": "阳",
+      "image": "太阳烈火",
+      "face": "☀️",
+      "title": "热烈外放的照亮者",
+      "desc": "传统命理以丙火喻太阳：热情外放，光明磊落，情绪与想法都不太隐藏。有感染力，乐于表达与分享，但脾气来得快，耐性与持续力是课题。",
+      "strengths": ["热情有活力", "光明坦率", "有感染力", "乐于付出"],
+      "weakness": ["性情急躁", "缺乏耐性", "情绪外显"],
+      "vector": { "extraversion": 85, "openness": 62, "conscientiousness": 48, "agreeableness": 60, "stability": 52 }
+    },
+    {
+      "key": "ding", "cn": "丁", "index": 3,
+      "element": "fire", "elementCn": "火", "yin": true, "polarity": "阴",
+      "image": "灯烛之火",
+      "face": "🕯️",
+      "title": "内敛细致的持温者",
+      "desc": "传统命理以丁火喻灯烛：光不炽烈但持久。心思细腻，观察入微，待人温暖却有分寸。想得多、说得少，内在情绪活动比外表丰富。",
+      "strengths": ["心细体贴", "有耐性", "洞察力好", "温暖持久"],
+      "weakness": ["思虑过多", "情绪内藏", "容易敏感"],
+      "vector": { "extraversion": 42, "openness": 68, "conscientiousness": 62, "agreeableness": 72, "stability": 42 }
+    },
+    {
+      "key": "wu", "cn": "戊", "index": 4,
+      "element": "earth", "elementCn": "土", "yin": false, "polarity": "阳",
+      "image": "高山厚土",
+      "face": "⛰️",
+      "title": "沉稳承载的守成者",
+      "desc": "传统命理以戊土喻高山：厚重稳定，能承担、抗压强。为人诚信务实，不轻易动摇，是可托付的类型。但变通较慢，观念不易更新。",
+      "strengths": ["稳重可靠", "抗压力强", "诚信务实", "能承担"],
+      "weakness": ["变通较慢", "观念保守", "表达不足"],
+      "vector": { "extraversion": 42, "openness": 35, "conscientiousness": 85, "agreeableness": 58, "stability": 78 }
+    },
+    {
+      "key": "ji", "cn": "己", "index": 5,
+      "element": "earth", "elementCn": "土", "yin": true, "polarity": "阴",
+      "image": "田园之土",
+      "face": "🌾",
+      "title": "包容滋养的调和者",
+      "desc": "传统命理以己土喻田园：能容纳、能滋养。为人细致包容，善于照顾周围与协调关系。心思较多，考虑周全，但也容易内耗与犹豫。",
+      "strengths": ["包容细致", "善于协调", "考虑周全", "务实"],
+      "weakness": ["容易内耗", "决断偏慢", "心思过重"],
+      "vector": { "extraversion": 45, "openness": 45, "conscientiousness": 75, "agreeableness": 78, "stability": 52 }
+    },
+    {
+      "key": "geng", "cn": "庚", "index": 6,
+      "element": "metal", "elementCn": "金", "yin": false, "polarity": "阳",
+      "image": "刀剑钢铁",
+      "face": "⚔️",
+      "title": "刚断直行的执行者",
+      "desc": "传统命理以庚金喻刀剑：刚毅果断，行动力强，讲义气重承诺。是非分明，说话直接不修饰。执行力是长处，柔软与转圜是需要练习的部分。",
+      "strengths": ["果断刚毅", "执行力强", "重义守诺", "是非分明"],
+      "weakness": ["说话过直", "缺乏柔软", "易生冲突"],
+      "vector": { "extraversion": 62, "openness": 45, "conscientiousness": 78, "agreeableness": 38, "stability": 65 }
+    },
+    {
+      "key": "xin", "cn": "辛", "index": 7,
+      "element": "metal", "elementCn": "金", "yin": true, "polarity": "阴",
+      "image": "珠玉金饰",
+      "face": "💎",
+      "title": "精致敏锐的审美者",
+      "desc": "传统命理以辛金喻珠玉：重质感与细节，审美敏锐。做事讲究、要求精细，对自己与他人标准都不低。较为敏感，在意评价与体面。",
+      "strengths": ["审美出色", "精细讲究", "洞察敏锐", "自我要求高"],
+      "weakness": ["较为敏感", "在意评价", "标准偏高"],
+      "vector": { "extraversion": 48, "openness": 68, "conscientiousness": 78, "agreeableness": 48, "stability": 42 }
+    },
+    {
+      "key": "ren", "cn": "壬", "index": 8,
+      "element": "water", "elementCn": "水", "yin": false, "polarity": "阳",
+      "image": "江河大海",
+      "face": "🌊",
+      "title": "流动包容的变通者",
+      "desc": "传统命理以壬水喻江海：容量大、流动性强。思维活跃，接受度高，善于随形势调整。见识广、点子多，但专注与定性需要刻意维持。",
+      "strengths": ["思维灵活", "包容度高", "适应力强", "见识广"],
+      "weakness": ["定性不足", "容易分心", "难以专一"],
+      "vector": { "extraversion": 68, "openness": 85, "conscientiousness": 42, "agreeableness": 62, "stability": 55 }
+    },
+    {
+      "key": "gui", "cn": "癸", "index": 9,
+      "element": "water", "elementCn": "水", "yin": true, "polarity": "阴",
+      "image": "雨露涓流",
+      "face": "💧",
+      "title": "沉静深思的感受者",
+      "desc": "传统命理以癸水喻雨露：润物无声。内向沉静，感受与直觉敏锐，常有不外露的深度思考。善解人意，但情绪较易起伏，也容易多虑。",
+      "strengths": ["直觉敏锐", "善解人意", "思考有深度", "细腻"],
+      "weakness": ["容易多虑", "情绪起伏", "不易表达"],
+      "vector": { "extraversion": 32, "openness": 78, "conscientiousness": 52, "agreeableness": 72, "stability": 35 }
+    }
+  ],
+
+  "branches": [
+    { "cn": "子", "index": 0, "element": "water", "elementCn": "水", "animal": "鼠", "hourFrom": 23, "hourTo": 1, "hourCn": "子时 23:00-00:59" },
+    { "cn": "丑", "index": 1, "element": "earth", "elementCn": "土", "animal": "牛", "hourFrom": 1, "hourTo": 3, "hourCn": "丑时 01:00-02:59" },
+    { "cn": "寅", "index": 2, "element": "wood", "elementCn": "木", "animal": "虎", "hourFrom": 3, "hourTo": 5, "hourCn": "寅时 03:00-04:59" },
+    { "cn": "卯", "index": 3, "element": "wood", "elementCn": "木", "animal": "兔", "hourFrom": 5, "hourTo": 7, "hourCn": "卯时 05:00-06:59" },
+    { "cn": "辰", "index": 4, "element": "earth", "elementCn": "土", "animal": "龙", "hourFrom": 7, "hourTo": 9, "hourCn": "辰时 07:00-08:59" },
+    { "cn": "巳", "index": 5, "element": "fire", "elementCn": "火", "animal": "蛇", "hourFrom": 9, "hourTo": 11, "hourCn": "巳时 09:00-10:59" },
+    { "cn": "午", "index": 6, "element": "fire", "elementCn": "火", "animal": "马", "hourFrom": 11, "hourTo": 13, "hourCn": "午时 11:00-12:59" },
+    { "cn": "未", "index": 7, "element": "earth", "elementCn": "土", "animal": "羊", "hourFrom": 13, "hourTo": 15, "hourCn": "未时 13:00-14:59" },
+    { "cn": "申", "index": 8, "element": "metal", "elementCn": "金", "animal": "猴", "hourFrom": 15, "hourTo": 17, "hourCn": "申时 15:00-16:59" },
+    { "cn": "酉", "index": 9, "element": "metal", "elementCn": "金", "animal": "鸡", "hourFrom": 17, "hourTo": 19, "hourCn": "酉时 17:00-18:59" },
+    { "cn": "戌", "index": 10, "element": "earth", "elementCn": "土", "animal": "狗", "hourFrom": 19, "hourTo": 21, "hourCn": "戌时 19:00-20:59" },
+    { "cn": "亥", "index": 11, "element": "water", "elementCn": "水", "animal": "猪", "hourFrom": 21, "hourTo": 23, "hourCn": "亥时 21:00-22:59" }
+  ],
+
+  "elements": {
+    "wood": { "cn": "木", "face": "🌳", "color": "#3FB98C", "trait": "生长、仁德、条达", "excess": "木过旺者传统认为易固执、不易妥协", "lack": "木不足者传统认为主见较弱、决断力不足" },
+    "fire": { "cn": "火", "face": "🔥", "color": "#FF8A6B", "trait": "热情、礼节、光明", "excess": "火过旺者传统认为易急躁、情绪外显", "lack": "火不足者传统认为热情不足、表达偏冷" },
+    "earth": { "cn": "土", "face": "⛰️", "color": "#D4A574", "trait": "稳重、信实、承载", "excess": "土过旺者传统认为易保守、变通迟缓", "lack": "土不足者传统认为根基感弱、缺乏安定" },
+    "metal": { "cn": "金", "face": "⚔️", "color": "#B8BFC9", "trait": "刚毅、义气、决断", "excess": "金过旺者传统认为易刚硬、言语直冲", "lack": "金不足者传统认为决断不足、不易坚持" },
+    "water": { "cn": "水", "face": "💧", "color": "#8FC9F5", "trait": "智慧、灵动、流通", "excess": "水过旺者传统认为思虑过多、定性不足", "lack": "水不足者传统认为灵活性欠缺、应变较慢" }
+  },
+
+  "strengthLevels": [
+    { "min": 4, "label": "偏旺", "color": "#FF8A6B" },
+    { "min": 2, "label": "适中", "color": "#3FB98C" },
+    { "min": 1, "label": "偏弱", "color": "#8FC9F5" },
+    { "min": 0, "label": "缺失", "color": "#C4C0CA" }
+  ],
+
+  "lichun": {
+    "_note": "立春近似日期表（用于年柱换年）。立春为太阳过黄经 315° 之时刻，多在 2 月 3-5 日。此处按常见值取 2 月 4 日，误差最多 1 天。",
+    "_srcId": "bazi_lichun_year",
+    "month": 2,
+    "day": 4
+  }
+}

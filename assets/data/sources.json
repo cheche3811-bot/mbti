@@ -1,0 +1,199 @@
+{
+  "_meta": {
+    "file": "sources.json",
+    "purpose": "全部分析结论的出处登记表。每条结论通过 srcId 关联到此处。",
+    "evidenceLevels": {
+      "empirical": {
+        "label": "实证研究支持",
+        "desc": "有同行评审的实证研究支持，可重复验证",
+        "badgeColor": "#3FB98C"
+      },
+      "contested": {
+        "label": "实证但有争议",
+        "desc": "存在实证研究，但学界对其信度或效度有明确争议",
+        "badgeColor": "#F2A63B"
+      },
+      "heuristic": {
+        "label": "启发式推导",
+        "desc": "基于已有实证数据的推导设计，本身未经独立验证",
+        "badgeColor": "#8FC9F5"
+      },
+      "tradition": {
+        "label": "传统文化说法",
+        "desc": "源自传统文化典籍，无现代实证支持，不具预测效力",
+        "badgeColor": "#C4A9F5"
+      },
+      "refuted": {
+        "label": "已被实证否证",
+        "desc": "有严谨实证研究明确否证其预测效力",
+        "badgeColor": "#EA7BA8"
+      }
+    }
+  },
+
+  "sources": {
+    "bigfive_costa1992": {
+      "level": "empirical",
+      "title": "Revised NEO Personality Inventory (NEO-PI-R) 手册",
+      "authors": "Costa, P. T., & McCrae, R. R.",
+      "year": 1992,
+      "publisher": "Psychological Assessment Resources",
+      "note": "大五人格（Big Five / FFM）的标准测量工具，本项目统一特质轴的理论基础。大五模型是当代人格心理学中实证支持最充分的框架。"
+    },
+    "mbti_bigfive_mccrae1989": {
+      "level": "empirical",
+      "title": "Reinterpreting the Myers-Briggs Type Indicator from the Perspective of the Five-Factor Model of Personality",
+      "authors": "McCrae, R. R., & Costa, P. T.",
+      "year": 1989,
+      "journal": "Journal of Personality, 57(1), 17-40",
+      "doi": "10.1111/j.1467-6494.1989.tb00759.x",
+      "note": "本项目 MBTI→大五 映射系数的直接来源。实测相关性：E-I 与外向性 r≈.74；S-N 与开放性 r≈.72；T-F 与宜人性 r≈.44；J-P 与尽责性 r≈.49。"
+    },
+    "mbti_reliability_pittenger2005": {
+      "level": "contested",
+      "title": "Cautionary Comments Regarding the Myers-Briggs Type Indicator",
+      "authors": "Pittenger, D. J.",
+      "year": 2005,
+      "journal": "Consulting Psychology Journal: Practice and Research, 57(3), 210-221",
+      "note": "对 MBTI 的主要批评：重测信度不足（间隔 5 周后约 50% 受测者类型发生变化）；四维度实际呈连续正态分布而非双峰分布，二分归类缺乏统计依据。这是本项目将 MBTI 标注为 contested 的原因。"
+    },
+    "mbti_dichotomy_bess2002": {
+      "level": "contested",
+      "title": "Bimodal Distributions? Testing an Assumption of the Myers-Briggs Type Indicator",
+      "authors": "Bess, T. L., & Harvey, R. J.",
+      "year": 2002,
+      "journal": "Journal of Personality Assessment, 78(2), 176-186",
+      "note": "实证检验发现 MBTI 各维度得分呈单峰正态分布，不支持「非此即彼」的类型学假设。本项目因此以百分比呈现倾向强度，并对 45-58% 区间标注「倾向不明显」。"
+    },
+    "mbti_capt_frequency": {
+      "level": "empirical",
+      "title": "Estimated Frequencies of the Types in the United States Population",
+      "authors": "Center for Applications of Psychological Type (CAPT)",
+      "year": 2003,
+      "note": "本项目 16 型人口占比数据来源。基于美国人口抽样估计，非全球数据，中国大陆分布可能存在差异。"
+    },
+    "likert_1932": {
+      "level": "empirical",
+      "title": "A Technique for the Measurement of Attitudes",
+      "authors": "Likert, R.",
+      "year": 1932,
+      "journal": "Archives of Psychology, 140, 1-55",
+      "note": "七级量表的方法学来源。相比二分强制选择，等距量表能保留倾向强度信息。"
+    },
+    "acquiescence_paulhus1991": {
+      "level": "empirical",
+      "title": "Measurement and Control of Response Bias",
+      "authors": "Paulhus, D. L.",
+      "year": 1991,
+      "publisher": "In Measures of Personality and Social Psychological Attitudes, Academic Press",
+      "note": "默认同意倾向（acquiescence bias）的标准应对方案是正反向计分题平衡。本项目每维度正反向题严格 5:5（AT 维度 4:4）即出于此。"
+    },
+
+    "astro_carlson1985": {
+      "level": "refuted",
+      "title": "A Double-Blind Test of Astrology",
+      "authors": "Carlson, S.",
+      "year": 1985,
+      "journal": "Nature, 318, 419-425",
+      "doi": "10.1038/318419a0",
+      "note": "发表于《自然》的双盲实验。占星师无法将人格问卷结果与对应星盘正确配对，准确率与随机猜测无显著差异。这是占星学缺乏预测效力最有力的实证证据之一。"
+    },
+    "astro_dean2003": {
+      "level": "refuted",
+      "title": "Is Astrology Relevant to Consciousness and Psi?",
+      "authors": "Dean, G., & Kelly, I. W.",
+      "year": 2003,
+      "journal": "Journal of Consciousness Studies, 10(6-7), 175-198",
+      "note": "对超过 2000 名「时辰双生子」（出生时间极为接近者）的追踪研究，发现其性格与人生轨迹相似度并未高于随机配对。直接否证出生时刻决定性格的核心假设。"
+    },
+    "astro_hartmann2006": {
+      "level": "empirical",
+      "title": "The Relationship Between Birth Date and Individual Differences in Personality and General Intelligence",
+      "authors": "Hartmann, P., Reuter, M., & Nyborg, H.",
+      "year": 2006,
+      "journal": "Personality and Individual Differences, 40(7), 1349-1362",
+      "note": "基于 15,000+ 样本，检验出生日期与人格及智力的关系，未发现任何有意义的关联。"
+    },
+    "astro_barnum_forer1949": {
+      "level": "empirical",
+      "title": "The Fallacy of Personal Validation: A Classroom Demonstration of Gullibility",
+      "authors": "Forer, B. R.",
+      "year": 1949,
+      "journal": "Journal of Abnormal and Social Psychology, 44(1), 118-123",
+      "note": "巴纳姆效应（Forer effect）的原始研究。人们倾向于认为模糊、普适的人格描述精准符合自己。这解释了为何星座描述常令人产生「说得真准」的主观感受。"
+    },
+    "astro_tradition_ptolemy": {
+      "level": "tradition",
+      "title": "Tetrabiblos（四书 / 占星四书）",
+      "authors": "Claudius Ptolemaeus（托勒密）",
+      "year": 150,
+      "note": "西方占星学的奠基文献，黄道十二宫的性格归属体系源出于此。本项目星座性格描述属于此传统体系的现代通俗版本，仅作文化参考。"
+    },
+    "astro_boundary_aa2024": {
+      "level": "empirical",
+      "title": "The Astronomical Almanac",
+      "authors": "U.S. Naval Observatory & HM Nautical Almanac Office",
+      "year": 2024,
+      "note": "星座日期边界的天文依据。太阳过黄经 0°/30°/60°… 的时刻每年浮动约 ±1 天，因此交界日期附近的星座归属需以实际年份的天文数据为准。本项目使用平均值并对交界日主动提示。"
+    },
+
+    "bazi_sanmingtonghui": {
+      "level": "tradition",
+      "title": "《三命通会》",
+      "authors": "万民英（明）",
+      "year": 1578,
+      "note": "明代命理学集成之作，十天干性格论述的主要传统来源。属传统文化典籍，无现代实证支持。"
+    },
+    "bazi_yuanhaiziping": {
+      "level": "tradition",
+      "title": "《渊海子平》",
+      "authors": "徐大升（宋）· 唐锦池编订",
+      "year": 1600,
+      "note": "子平术（八字命理）的奠基文献，四柱排盘与五行生克体系的传统依据。属传统文化典籍。"
+    },
+    "bazi_ditianshui": {
+      "level": "tradition",
+      "title": "《滴天髓》",
+      "authors": "刘基（传）· 任铁樵注",
+      "year": 1848,
+      "note": "论五行旺衰与格局的传统命理经典，本项目五行强弱解读的参考来源。属传统文化典籍。"
+    },
+    "bazi_ganzhi_calendar": {
+      "level": "empirical",
+      "title": "干支纪日的连续性与儒略日换算",
+      "authors": "《中国天文年历》/ 紫金山天文台",
+      "year": 2020,
+      "note": "干支纪日自古连续未断，可与儒略日建立确定的数学换算关系。本项目以 1900-01-31（儒略日 2415051）为甲辰日基准推算日柱，此换算本身是可验证的历法计算，与命理解读的性质不同——历法准确，解读属传统说法。"
+    },
+    "bazi_lichun_year": {
+      "level": "tradition",
+      "title": "命理年柱以立春为界的惯例",
+      "authors": "传统命理通例（见《渊海子平》《三命通会》）",
+      "year": 1600,
+      "note": "八字年柱换年以立春（太阳过黄经 315°，约 2 月 4 日）为界，而非农历正月初一或公历元旦。本项目采用此惯例，立春日期使用近似值。"
+    },
+    "bazi_true_solar_time": {
+      "level": "empirical",
+      "title": "真太阳时与平太阳时的差异（时差方程）",
+      "authors": "天文学基础常识",
+      "year": 2024,
+      "note": "精确排盘需将钟表时间校正为出生地真太阳时，涉及经度时差（每偏离 15° 差 1 小时）与均时差（全年 -14 至 +16 分钟）。本项目未做此校正，时柱为近似值，此为已知局限。"
+    },
+
+    "synthesis_heuristic": {
+      "level": "heuristic",
+      "title": "本项目三维交叉分析的映射设计",
+      "authors": "本项目设计",
+      "year": 2026,
+      "note": "将 MBTI、星座、八字三者统一映射到大五人格五轴，再以余弦相似度计算一致性——这是本项目的设计推导，并非已发表的实证发现。MBTI→大五 的映射有实证基础（McCrae & Costa 1989），星座与八字→大五 的映射则是依据其传统性格描述文本进行的语义归纳，无实证依据。因此「一致性百分比」应理解为『三套描述体系在文字层面的吻合程度』，而非任何科学测量结果。"
+    },
+    "cosine_similarity": {
+      "level": "empirical",
+      "title": "余弦相似度在人格剖面比较中的应用",
+      "authors": "Cronbach, L. J., & Gleser, G. C.",
+      "year": 1953,
+      "journal": "Psychological Bulletin, 50(6), 456-473",
+      "note": "人格剖面（profile）相似性的度量方法。本项目用余弦相似度比较三个维度的特质向量，方法本身成立，但输入向量的效度取决于各维度自身的效度。"
+    }
+  }
+}

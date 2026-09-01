@@ -152,7 +152,7 @@ function renderResult() {
 
   const matchHtml = T.match.map(m => `
     <div class="match-card">
-   <div class="mf">${TYPES[m].face}</div>
+   <div class="mf">${typeof mbtiAvatar === "function" ? mbtiAvatar(m, 56, false) : TYPES[m].face}</div>
       <div class="mc">${m}</div>
       <div class="mn">${TYPES[m].cn}</div>
     </div>`).join('');
@@ -160,7 +160,7 @@ function renderResult() {
   $('#result-wrap').innerHTML = `
     <div class="hero-card" style="--gc:${G.light}">
       ${rare ? `<div class="hc-rare">稀有 · 仅 ${T.pct}</div>` : ''}
-      <div class="hc-face">${T.face}</div>
+      <div class="hc-face">${typeof mbtiAvatar === "function" ? mbtiAvatar(r.type, 108, false) : T.face}</div>
       <div class="hc-code" style="color:${G.color}">${r.full}</div>
       <div class="hc-cn">${T.cn}</div>
       <div class="hc-title">${T.title}</div>
