@@ -256,16 +256,17 @@ async function buildShareCardV2(syn, prof, input, opt = {}) {
   /* ================= 中段：数据亮点 ================= */
   let cy = y + 34;
 
-  // L2 金句黑卡
+  // L2 金句黑卡 —— 反差型原型优先用 contrastLine（更短、更戳人），否则回退 oneLiner
+  const line = (arc && arc.contrastLine) ? arc.contrastLine : prof.oneLiner;
   c.font = V2F(40, 800);
-  const qL = v2Lines(c, prof.oneLiner, V2_INNER - 96);
+  const qL = v2Lines(c, line, V2_INNER - 96);
   const qH = 68 + qL * 58;
   v2Card(c, V2_PAD, cy, V2_INNER, qH, 36, ink, ink, 6, 11);
   c.fillStyle = isDark ? '#2B2233' : '#FFF6E5';
   if (isDark) { c.fillStyle = theme.bg === '#2B2233' ? '#FFF6E5' : '#2B2233'; }
   c.fillStyle = '#FFF6E5';
   c.font = V2F(40, 800);
-  v2Wrap(c, prof.oneLiner, V2_W / 2, cy + 60, V2_INNER - 96, 58);
+  v2Wrap(c, line, V2_W / 2, cy + 60, V2_INNER - 96, 58);
   cy += qH + 40;
 
   // 成就徽章带 —— 核心传播资产

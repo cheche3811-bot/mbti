@@ -48,6 +48,10 @@ function buildVars(syn, prof, input) {
   if (syn.overall !== null) {
     v.score = syn.overall;
     v.scoreLabel = syn.level.label;
+    // 高一致标记：供「共识」类文案（如 res-06「几套体系说得差不多」）判断。
+    // 有显著分歧时这类文案是错的（明明差 46 分却写「说得差不多」）。
+    // 只在真时才赋值 —— needs 检查只看 undefined/null，赋 false 会被当成「存在」。
+    if (syn.overall >= 70) v.highSync = true;
   }
 
   // MBTI 相关
@@ -254,7 +258,8 @@ function pickTemplate(templates, vars, usedIds, maxLen) {
  * @param {Object} syn synthesize() 结果
  * @param {Object} prof buildProfile() 结果
  * @param {Object} input 原始输入
- * @param {Object} opt { withCta:bool, platform:'wechat_moments'|'weibo'|... }
+ * @param {Object} opt { withCta:bool, platform:'wechat_moments'|'weibo'|..., style:'resonance' }
+ *        opt.style 只生成指定风格的文案（如 'resonance'），不传则全部风格各出一条
  * @returns {Array} [{styleKey, styleName, icon, desc, text, len, templateId}]
  */
 function generateCopyCandidates(syn, prof, input, opt = {}) {
@@ -273,7 +278,10 @@ function generateCopyCandidates(syn, prof, input, opt = {}) {
   const out = [];
   const pickedIds = [];
 
-  Object.entries(SHARE_COPY_DATA.styles).forEach(([key, style]) => {
+  const styleKeys = opt.style ? [opt.style] : Object.keys(SHARE_COPY_DATA.styles);
+  styleKeys.forEach(key => {
+    const style = SHARE_COPY_DATA.styles[key];
+    if (!style) return;
     const tpl = pickTemplate(style.templates, vars, usedIds, maxLen);
     if (!tpl) return;   // 该风格无可用模板（如单维度时缺 score）
 

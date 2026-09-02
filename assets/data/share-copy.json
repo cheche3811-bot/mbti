@@ -157,7 +157,8 @@
           "text": "{dimList} 都提到我「{topTrait}」。\n\n几套完全不同的体系，居然在这一点上说得差不多。那大概是真的了。",
           "needs": [
             "dimList",
-            "topTrait"
+            "topTrait",
+            "highSync"
           ]
         }
       ]

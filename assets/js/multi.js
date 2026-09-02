@@ -332,7 +332,9 @@ let shareTheme = null;    // 当前配色主题
 function buildShareSection(syn, prof, input) {
   const vars = buildVars(syn, prof, input);
   const badges = calcBadges(vars);
-  shareCands = generateCopyCandidates(syn, prof, input);
+  // 只出「共鸣式」一条：不再让用户在 6 套里挑，直接给一句戳心的，
+  // 不满意点「换一句」在共鸣式模板里轮换。
+  shareCands = generateCopyCandidates(syn, prof, input, { style: 'resonance' });
 
   const badgeHtml = badges.length ? `
     <div class="ach-wrap">
@@ -348,16 +350,12 @@ function buildShareSection(syn, prof, input) {
 
   return `<div class="share-sec">
     <h3>发出去，看看谁跟你一样 🎉</h3>
-    <p>三维分析报告卡 · 自动生成多套文案</p>
+    <p>三维分析报告卡 · 自动生成专属文案</p>
 
     ${badgeHtml}
 
     <div class="copy-block">
-      <div class="cb-head">
-        <span>✍️ 挑一套文案</span>
-        <button class="cb-refresh" id="btn-copy-refresh">🔄 换一批</button>
-      </div>
-      <div class="copy-list" id="copy-list">${renderCopyCards(shareCands)}</div>
+      <div id="copy-list">${renderCopyCards(shareCands)}</div>
     </div>
 
     <div class="share-btns">
@@ -366,31 +364,31 @@ function buildShareSection(syn, prof, input) {
   </div>`;
 }
 
-/* 文案候选卡 */
+/* 单条共鸣式文案卡（无需用户选择，一键复制 + 换一句） */
 function renderCopyCards(cands) {
-  return cands.map((c, i) => `
-    <div class="cc" data-idx="${i}">
-      <div class="cc-head">
-        <span class="cc-style">${c.icon} ${c.styleName}</span>
-        <span class="cc-len">${c.len} 字</span>
+  const c = cands[0];
+  if (!c) return '';
+  return `
+    <div class="cs-card">
+      <div class="cs-tag">💭 说中你的那句话</div>
+      <div class="cs-text">${c.text.replace(/\n/g, '<br>')}</div>
+      <div class="cs-acts">
+        <button class="btn-share" id="btn-copy-main">📋 复制文案</button>
+        <button class="btn-ghost" id="btn-copy-refresh">🔄 换一句</button>
       </div>
-      <div class="cc-text">${c.text.replace(/\n/g, '<br>')}</div>
-      <button class="cc-copy" data-idx="${i}">复制这套</button>
-    </div>`).join('');
+    </div>`;
 }
 
-/* 绑定文案候选交互 */
+/* 绑定单条文案交互 */
 function bindCopyCards() {
-  $$('#copy-list .cc-copy').forEach(btn => {
-    btn.onclick = e => {
-      e.stopPropagation();
-      const c = shareCands[+btn.dataset.idx];
-      if (!c) return;
-      navigator.clipboard.writeText(c.text)
-        .then(() => toast('已复制「' + c.styleName + '」文案 ✨'))
-        .catch(() => toast('复制失败，请手动选择文字'));
-    };
-  });
+  const main = $('#btn-copy-main');
+  if (main) main.onclick = () => {
+    const c = shareCands[0];
+    if (!c) return;
+    navigator.clipboard.writeText(c.text)
+      .then(() => toast('文案已复制，去粘贴吧 ✨'))
+      .catch(() => toast('复制失败，请手动选择文字'));
+  };
 }
 
 /* 维度对应的 SVG 卡通头像 */
@@ -867,13 +865,13 @@ function bindMultiResult() {
 
   bindCopyCards();
 
-  // 换一批文案
+  // 换一句（仍在共鸣式模板里轮换，不出其它风格）
   const refresh = $('#btn-copy-refresh');
   if (refresh) refresh.onclick = () => {
-    shareCands = regenerateCopyCandidates(syn, prof, input);
+    shareCands = regenerateCopyCandidates(syn, prof, input, { style: 'resonance' });
     $('#copy-list').innerHTML = renderCopyCards(shareCands);
     bindCopyCards();
-    toast('换了一批新文案 ✨');
+    toast('换了一句 ✨');
   };
 
   // 生成分享图

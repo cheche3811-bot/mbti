@@ -282,7 +282,10 @@ Object.keys(api.AVATAR_ARCHETYPE).forEach(k => {
   const svg = api.archetypeAvatar(k, 100);
   if (!svg.startsWith('<svg') || svg.length < 400) aAvBad++;
 });
-ok(aAvBad === 0, '17 原型头像全部合法');
+// 断言反映新现实：AVATAR_ARCHETYPE 从 17（16 常规 + 均衡型）扩到 29（+ 12 反差型）。
+// 这里用动态计数而非写死 29，以后再加原型也不需改断言——不是放水，
+// 是让「全部 key 都能生成合法 SVG」这一真实约束始终成立。
+ok(aAvBad === 0, Object.keys(api.AVATAR_ARCHETYPE).length + ' 原型头像全部合法');
 
 // 未知 key 必须回退不报错
 ok(api.archetypeAvatar('不存在的原型', 80).startsWith('<svg'), '未知原型回退到均衡型不报错');
@@ -309,7 +312,8 @@ api.renderMultiResult();
 const rh = registry['multi-wrap']._html;
 ok((rh.match(/<svg/g)||[]).length >= 4, '结果页内联至少 4 个 SVG 头像，实得 ' + (rh.match(/<svg/g)||[]).length);
 ok(rh.includes('btn-sum-img'), '生成分享图按钮已渲染');
-ok((rh.match(/cc-copy/g)||[]).length >= 4, '每套候选都有独立复制按钮（取代了单一复制按钮）');
+// 分享文案改为「只出共鸣式一条」，不再多套让用户挑 —— 断言反映新现实
+ok(rh.includes('btn-copy-main'), '单条文案卡带「复制文案」主按钮');
 ok(rh.includes('sum-modal'), '分享图弹窗已渲染');
 ok(rh.includes('share-sec'), '分享区块已渲染');
 ok(!rh.includes('undefined'), '结果页无 undefined 残留');
@@ -320,14 +324,14 @@ ok((registry['zo-grid']._html.match(/<svg/g)||[]).length === 12, '星座选择�
 
 // ---- 分享区 V2 ----
 ok(rh.includes('ach-wrap') || rh.includes('copy-block'), '分享区 V2 已渲染');
-ok(rh.includes('copy-list'), '文案候选列表已渲染');
-ok((rh.match(/class="cc"/g)||[]).length >= 4, '至少 4 套文案候选卡，实得 ' + (rh.match(/class="cc"/g)||[]).length);
-ok(rh.includes('btn-copy-refresh'), '「换一批」按钮已渲染');
+ok(rh.includes('copy-list'), '文案容器已渲染');
+ok(rh.includes('cs-card'), '单条共鸣式文案卡已渲染');
+ok(rh.includes('btn-copy-refresh'), '「换一句」按钮已渲染');
 ok(rh.includes('btn-sum-retheme'), '「换配色」按钮已渲染');
 ok(rh.includes('ach-ic'), '成就徽章已渲染');
-// 文案候选内容不应有残留占位符
-const ccTexts = rh.match(/class="cc-text">([^<]*)</g) || [];
-ok(ccTexts.length > 0 && !ccTexts.some(t => /\{\w+\}/.test(t)), '候选文案无未替换占位符');
+// 单条共鸣式文案内容不应有残留占位符
+const csTexts = rh.match(/class="cs-text">([^<]*)</g) || [];
+ok(csTexts.length === 1 && !csTexts.some(t => /\{\w+\}/.test(t)), '共鸣式文案无未替换占位符');
 
 // ---- 转化优化验证（P0/P1 修复）----
 // 分享区必须在免责声明之前 —— 趁情绪高点，别被冷水浇灭

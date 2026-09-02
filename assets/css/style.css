@@ -1418,6 +1418,26 @@ kbd{
 .cc-copy:hover{opacity:.85}
 .cc-copy:active{opacity:.7}
 
+/* 单条共鸣式文案卡（无需用户选择，一键复制 + 换一句） */
+.cs-card{
+  background:#fff;border:2.5px solid var(--line);border-radius:var(--r-sm);
+  padding:16px;text-align:left;box-shadow:2px 2px 0 var(--line);
+}
+.cs-tag{
+  display:inline-block;font-size:11px;font-weight:900;color:var(--ink);
+  background:var(--yellow);border:2px solid var(--line);border-radius:999px;
+  padding:3px 11px;margin-bottom:11px;transform:rotate(-1.5deg);
+}
+.cs-text{
+  font-size:14px;line-height:1.85;color:#3A3145;font-weight:600;
+  white-space:normal;
+}
+.cs-acts{
+  display:flex;gap:9px;margin-top:14px;flex-wrap:wrap;align-items:center;
+}
+.cs-acts .btn-share{flex:1 1 auto;justify-content:center;padding:12px 18px;font-size:14px}
+.cs-acts .btn-ghost{flex:none}
+
 /* ---------- 弹窗操作区 ---------- */
 .modal-acts{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-top:16px}
 .modal-close{margin-top:0}

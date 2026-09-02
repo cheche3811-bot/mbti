@@ -87,7 +87,12 @@ const AV_EYE = {
     <path d="M59 49l1.4 3.4 3.6.3-2.7 2.4.8 3.5-3.1-1.9-3.1 1.9.8-3.5-2.7-2.4 3.6-.3z"/></g>`,
   // 温和垂眼
   gentle: () => `<g><ellipse cx="41" cy="55" rx="3.4" ry="3.8" fill="${AV_C.line}"/><ellipse cx="59" cy="55" rx="3.4" ry="3.8" fill="${AV_C.line}"/>
-    <g stroke="${AV_C.line}" stroke-width="2.4" stroke-linecap="round"><path d="M36 48c2-1.5 5-2 7-1"/><path d="M64 48c-2-1.5-5-2-7-1"/></g></g>`
+    <g stroke="${AV_C.line}" stroke-width="2.4" stroke-linecap="round"><path d="M36 48c2-1.5 5-2 7-1"/><path d="M64 48c-2-1.5-5-2-7-1"/></g></g>`,
+  // 左右不对称眼：左平静、右锐利 —— 表达「一半克制、一半锋利」的反差
+  split: () => `<g>
+    <path d="M36 54h9" stroke="${AV_C.line}" stroke-width="3" stroke-linecap="round" fill="none"/>
+    <path d="M64 51l-9 3 9 2z" fill="${AV_C.line}"/>
+  </g>`
 };
 
 /* ---------- 嘴 ---------- */
@@ -99,7 +104,12 @@ const AV_MOUTH = {
   open:  () => `<ellipse cx="50" cy="64" rx="4.6" ry="4" fill="${AV_C.line}"/>`,
   flat:  () => `<path d="M45 64h10" stroke="${AV_C.line}" stroke-width="2.8" stroke-linecap="round"/>`,
   // 被胡子遮住时用的微小嘴
-  hidden: () => ''
+  hidden: () => '',
+  // 左右不对称嘴：左半抿平、右半上扬 —— 表达「半张脸克制、半张脸在笑」
+  split: () => `<g stroke="${AV_C.line}" stroke-width="3" stroke-linecap="round" fill="none">
+    <path d="M44 64h6"/>
+    <path d="M50 63.5c2 3 6 3 8 0"/>
+  </g>`
 };
 
 /* ---------- 配饰 ---------- */
@@ -242,7 +252,24 @@ const AVATAR_ARCHETYPE = {
   '冷静型': { bg:'#D0DCE8', hair:['side','#39414D'],  eye:'sharp',  mouth:'flat',  acc:['monocle'] },
   '灵活型': { bg:'#FFE0B0', hair:['spike','#B0722F'], eye:'bright', mouth:'grin',  acc:['none'] },
   '自由型': { bg:'#D8E8F0', hair:['curly','#6B7A5A'], eye:'star',   mouth:'grin',  acc:['none'] },
-  '均衡型': { bg:'#E4E0EC', hair:['short','#4A4658'], eye:'calm',   mouth:'calm',  acc:['none'] }
+  '均衡型': { bg:'#E4E0EC', hair:['short','#4A4658'], eye:'calm',   mouth:'calm',  acc:['none'] },
+
+  /* ---------- 12 反差型原型头像 ----------
+     表达「两个体系打架」的张力：底色比常规原型更饱和一档，
+     关键差异靠 split 类零件（左右不对称眼/嘴）点出两面性。
+     甜度刻意压低——反差型不是可爱型，腮红只在双频型用一处。 */
+  '闷雷型': { bg:'#8FA3C8', hair:['short','#2F2A3D'], eye:'split',  mouth:'flat',  acc:['none'] },
+  '静燃型': { bg:'#FFAF7E', hair:['spike','#A8431F'], eye:'bright', mouth:'flat',  acc:['none'] },
+  '双频型': { bg:'#8FD8D0', hair:['twin','#4A4A52'],   eye:'bright', mouth:'split', acc:['none'], blush:true },
+  '脱缰型': { bg:'#F2C46A', hair:['spike','#7A3F1A'], eye:'star',   mouth:'grin',  acc:['none'] },
+  '风筝型': { bg:'#A9D6F2', hair:['short','#4A6B8A'], eye:'calm',   mouth:'small', acc:['leaf'] },
+  '探路型': { bg:'#B5CEA5', hair:['short','#4A4A3A'], eye:'calm',   mouth:'small', acc:['none'] },
+  '弹簧型': { bg:'#E5D89A', hair:['curly','#6B4A2A'], eye:'bright', mouth:'grin',  acc:['none'] },
+  '留白型': { bg:'#EDE5D2', hair:['short','#5A4A3A'], eye:'glasses',mouth:'small', acc:['none'] },
+  '温刃型': { bg:'#F2C3BB', hair:['long','#6B4A42'],  eye:'sharp',  mouth:'small', acc:['none'] },
+  '分寸型': { bg:'#D8D4CA', hair:['side','#4A443A'],  eye:'calm',   mouth:'small', acc:['none'] },
+  '深水型': { bg:'#8FAED6', hair:['long','#2F3A56'],  eye:'gentle', mouth:'calm',  acc:['none'] },
+  '韧弦型': { bg:'#C9B9E2', hair:['bob','#5A4A58'],   eye:'calm',   mouth:'calm',  acc:['flower','#C4A9F5'] }
 };
 
 /* ============================================================
