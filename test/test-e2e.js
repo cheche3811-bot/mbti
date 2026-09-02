@@ -188,7 +188,8 @@ try {
   ok((h.match(/wx-row/g)||[]).length === 5, '五行 5 行齐全');
   // ---- 性格总结区块 ----
   ok(h.includes('class="ps"'), '性格总结区块已渲染');
-  ok(h.includes('ps-arc-name'), '人格原型名称已渲染');
+  // 原型名已前置到首屏 hero（my-title），不再埋在 summary 的 ps-arc-name
+  ok(h.includes('my-title'), '人格原型名称已在首屏渲染');
   ok(h.includes('ps-one'), '一句话概括已渲染');
   ok(h.includes('pb-good'), '优势区块已渲染');
   ok(h.includes('pb-adv'), '建议区块已渲染');
@@ -217,7 +218,7 @@ combos.forEach(c => {
     const h = registry['multi-wrap']._html;
     const single = syn.count === 1;
     const hasRing = h.includes('ms-num');
-    const hasSummary = h.includes('class="ps"') && h.includes('ps-arc-name');
+    const hasSummary = h.includes('class="ps"') && h.includes('my-title');
     const pf = api.buildProfile(syn);
     ok(h.length > 1500 && (single ? !hasRing : hasRing) && hasSummary,
        c.n + ' → ' + pf.archetype.name + '（' + syn.count + '维'

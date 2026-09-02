@@ -329,14 +329,10 @@ function runMultiAnalysis() {
 let shareCands = [];      // 当前文案候选
 let shareTheme = null;    // 当前配色主题
 
-function buildShareSection(syn, prof, input) {
-  const vars = buildVars(syn, prof, input);
-  const badges = calcBadges(vars);
-  // 只出「共鸣式」一条：不再让用户在 6 套里挑，直接给一句戳心的，
-  // 不满意点「换一句」在共鸣式模板里轮换。
-  shareCands = generateCopyCandidates(syn, prof, input, { style: 'resonance' });
-
-  const badgeHtml = badges.length ? `
+/* 成就徽章带（前置到结果页顶部 —— 徽章是最强分享驱动力） */
+function buildBadgeHtml(badges) {
+  if (!badges || !badges.length) return '';
+  return `
     <div class="ach-wrap">
       <div class="ach-title">🏆 已解锁 ${badges.length} 个成就</div>
       <div class="ach-list">
@@ -346,13 +342,17 @@ function buildShareSection(syn, prof, input) {
             <span class="ach-txt"><b>${b.label}</b><i>${b.sub}</i></span>
           </div>`).join('')}
       </div>
-    </div>` : '';
+    </div>`;
+}
+
+function buildShareSection(syn, prof, input) {
+  // 只出「共鸣式」一条：不再让用户在 6 套里挑，直接给一句戳心的，
+  // 不满意点「换一句」在共鸣式模板里轮换。
+  shareCands = generateCopyCandidates(syn, prof, input, { style: 'resonance' });
 
   return `<div class="share-sec">
     <h3>发出去，看看谁跟你一样 🎉</h3>
     <p>三维分析报告卡 · 自动生成专属文案</p>
-
-    ${badgeHtml}
 
     <div class="copy-block">
       <div id="copy-list">${renderCopyCards(shareCands)}</div>
@@ -442,8 +442,11 @@ function renderMultiResult() {
       <div class="my-faces">
         ${syn.dims.map(d => `<span class="my-face" title="${d.label}">${dimAvatar(d, input)}</span>`).join('')}
       </div>
-      <h1 class="my-title">你的综合性格画像</h1>
-      <p class="my-sub">基于 ${syn.dims.map(d => d.label).join(' + ')} ${syn.count} 个维度</p>
+      <span class="my-kicker">你的人格原型</span>
+      <h1 class="my-title">${prof.archetype.name}</h1>
+      <p class="my-sub">${prof.archetype.title}</p>
+      ${prof.archetype.contrastLine ? `
+      <div class="my-quote">「${prof.archetype.contrastLine}」</div>` : ''}
       <div class="my-doms">${domTags}</div>
       ${isSingle ? '' : `
         <div class="my-score" style="--sc:${syn.level.color}">
@@ -462,6 +465,9 @@ function renderMultiResult() {
           </div>
         </div>`}
     </div>`;
+
+  // 成就徽章（前置到 hero 之后 —— 徽章是最强分享驱动力，不再埋在第 9 位）
+  const badgeHtml = buildBadgeHtml(calcBadges(buildVars(syn, prof, input)));
 
   /* ---------- 维度卡片 ---------- */
   const dimCards = syn.dims.map(d => {
@@ -617,21 +623,9 @@ function renderMultiResult() {
   /* ---------- 性格总结（核心区块，放在最前）---------- */
   const summaryHtml = `
     <div class="ps">
-      <div class="ps-badge">✦ 三维综合性格总结 ✦</div>
-
-      <div class="ps-arc">
-        <div class="ps-arc-face">${archetypeAvatar(prof.archetype.name, 96, false)}</div>
-        <div class="ps-arc-txt">
-          <span class="ps-arc-label">你的人格原型</span>
-          <h2 class="ps-arc-name">${prof.archetype.name}</h2>
-          <p class="ps-arc-title">${prof.archetype.title}</p>
-        </div>
-      </div>
+      <div class="ps-badge">✦ 你的性格详解 ✦</div>
 
       <p class="ps-arc-desc">${prof.archetype.desc}</p>
-
-      ${prof.archetype.contrastLine ? `
-      <div class="ps-contrast-line">「${prof.archetype.contrastLine}」</div>` : ''}
 
       <div class="ps-one">${prof.oneLiner}</div>
 
@@ -704,6 +698,7 @@ function renderMultiResult() {
       <button class="btn-share sb-btn" id="btn-me-too">🧩 测测我自己</button>
     </div>` : '')
     + heroHtml
+    + badgeHtml                         // ← 徽章前置：最强分享驱动力紧跟身份卡
     + summaryHtml
     + buildShareSection(syn, prof, input)   // ← 上移到情绪高点
     + `<div class="sec"><div class="sec-h"><span class="ic">🧩</span>三个维度分别怎么说</div></div>`

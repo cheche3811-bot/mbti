@@ -917,8 +917,21 @@ kbd{
   box-shadow:var(--shadow-sm);margin-left:-11px;
 }
 .my-face:first-child{margin-left:0}
-.my-title{font-size:clamp(24px,6vw,32px);font-weight:900;letter-spacing:-.8px;position:relative;z-index:1}
-.my-sub{font-size:13px;font-weight:700;color:#5A4E63;margin-top:7px;position:relative;z-index:1}
+.my-kicker{
+  display:inline-block;font-size:11px;font-weight:900;color:var(--ink);
+  background:var(--yellow);border:2px solid var(--line);border-radius:999px;
+  padding:3px 12px;margin-bottom:9px;transform:rotate(-1.5deg);
+  position:relative;z-index:1;
+}
+.my-title{font-size:clamp(32px,9vw,46px);font-weight:900;letter-spacing:-1px;line-height:1.05;position:relative;z-index:1}
+.my-sub{font-size:14px;font-weight:800;color:#5A4E63;margin-top:9px;position:relative;z-index:1}
+.my-quote{
+  margin-top:14px;display:inline-block;
+  background:linear-gradient(135deg,var(--lilac),var(--yellow));
+  border:2.5px solid var(--line);border-radius:var(--r-sm);
+  padding:11px 17px;font-size:15px;font-weight:900;line-height:1.5;
+  box-shadow:var(--shadow-sm);position:relative;z-index:1;
+}
 .my-doms{display:flex;justify-content:center;gap:8px;flex-wrap:wrap;margin-top:16px;position:relative;z-index:1}
 .dom-tag{
   background:var(--dc);border:2.5px solid var(--line);border-radius:999px;
