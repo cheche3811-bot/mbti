@@ -84,6 +84,7 @@ function answer(v) {
     if (state.idx < QUESTIONS.length - 1) {
       state.idx++;
       render();
+      checkMilestone(state.idx);
     } else {
       $('#prog-fill').style.width = '100%';
     finish();
@@ -354,9 +355,28 @@ function bindResult() {
 };
 }
 
+/* ---------- 答题里程碑 ---------- */
+const MILESTONES = {
+  12: { dim: 'EI', label: '能量来源', emoji: '⚡', txt: '已完成 1/4' },
+  24: { dim: 'SN', label: '认知偏好', emoji: '🔍', txt: '进度过半' },
+  36: { dim: 'TF', label: '决策方式', emoji: '⚖️', txt: '已完成 3/4，就快好了' }
+};
+
+/* 答完第 N 题时给一个「有收获感」的反馈，降低 48 题的心理负担 */
+function checkMilestone(idx) {
+  const m = MILESTONES[idx];
+  if (!m) return;
+  const t = partialTendency(state.answers, m.dim);
+  if (!t) return;
+  const isFirst = t.pct >= 50;
+  const letter = isFirst ? t.first : t.second;
+  const name = (DIM_LABEL[m.dim] && (isFirst ? DIM_LABEL[m.dim].first : DIM_LABEL[m.dim].second)) || letter;
+  toast(`${m.emoji} ${m.txt}，你的${m.label}已清晰——更偏「${name}（${letter}）」`, 3400);
+}
+
 /* ---------- Toast ---------- */
 let toastTimer;
-function toast(msg) {
+function toast(msg, dur = 2200) {
   let el = $('.toast');
   if (!el) {
     el = document.createElement('div');
@@ -366,7 +386,7 @@ function toast(msg) {
   el.textContent = msg;
   el.classList.add('on');
   clearTimeout(toastTimer);
-  toastTimer = setTimeout(() => el.classList.remove('on'), 2200);
+  toastTimer = setTimeout(() => el.classList.remove('on'), dur);
 }
 
 /* ---------- 初始化 ---------- */

@@ -122,3 +122,26 @@ function calculate(answers) {
     raw: sum
   };
 }
+
+/**
+ * 实时计算某维度已答题的倾向（供答题中途里程碑用）
+ * @param {number[]} answers 与 QUESTIONS 等长的作答数组（未答为 null）
+ * @param {string} dim 'EI'|'SN'|'TF'|'JP'|'AT'
+ * @returns {{pct:number, first:string, second:string}|null}
+ *   该维度已答至少 2 题时返回倾向，否则 null
+ */
+function partialTendency(answers, dim) {
+  let sum = 0, max = 0, answered = 0;
+  QUESTIONS.forEach((q, i) => {
+    if (q.dim !== dim) return;
+    const a = answers[i];
+    if (typeof a !== 'number') return;
+    sum += a * q.dir;
+    max += 3;
+    answered++;
+  });
+  if (answered < 2) return null;
+  const pct = Math.round(((sum + max) / (2 * max)) * 100);
+  const [first, second] = DIM_MAP[dim];
+  return { pct, first, second };
+}
