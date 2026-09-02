@@ -453,24 +453,24 @@ function matchArchetype(vector) {
  * ============================================================ */
 const CONTRAST_AXIS_TEXT = {
   extraversion: {
-    strength: '能安静下来专注，也能在关键时刻站出来——节奏由你说了算',
-    advice: '不必在「内向」和「外放」里二选一，两个都是你，只是场合不同'
+    strength: '能静得下，也能冲得出去',
+    advice: '内外都是你，别逼自己选一边'
   },
   openness: {
-    strength: '既有天马行空的想法，也留着一只脚踩在地上',
-    advice: '想法多的那面可以尽情飞，但别让务实的那面把它全盘否定'
+    strength: '敢想，也踩得住地',
+    advice: '想法可以飞，务实也别丢'
   },
   conscientiousness: {
-    strength: '想松的时候能松，想紧的时候能紧，弹性比一味自律更强',
-    advice: '别用「自律」那面去责怪「随性」那面，两者配合着来才不累'
+    strength: '松紧由你，弹性十足',
+    advice: '自律和随性，配着来才不累'
   },
   agreeableness: {
-    strength: '有边界感，也有温度——敢说真话，也照顾得到别人的感受',
-    advice: '直率是你的保护色，偶尔也让体贴那面出来透透气'
+    strength: '有边界，也有温度',
+    advice: '直率之外，也给温柔留点位置'
   },
   stability: {
-    strength: '情绪丰富但不失控，感知得到波动，也稳得住自己',
-    advice: '敏感不是缺点，它让你比钝感的人多一层雷达'
+    strength: '感知敏锐，也稳得住',
+    advice: '敏感不是缺点，是你的雷达'
   }
 };
 

@@ -632,6 +632,9 @@ function renderMultiResult() {
 
       <p class="ps-arc-desc">${prof.archetype.desc}</p>
 
+      ${prof.archetype.contrastLine ? `
+      <div class="ps-contrast-line">「${prof.archetype.contrastLine}」</div>` : ''}
+
       <div class="ps-one">${prof.oneLiner}</div>
 
       <div class="ps-block">

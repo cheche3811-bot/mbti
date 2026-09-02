@@ -1249,6 +1249,15 @@ kbd{
   text-align:center;box-shadow:var(--shadow);
 }
 
+/* 反差金句（contrastLine）：反差型原型专属，比描述更醒目、更有人味 */
+.ps-contrast-line{
+  margin-top:14px;
+  background:linear-gradient(135deg,var(--lilac),var(--yellow));
+  border:3px solid var(--line);border-radius:var(--r-md);
+  padding:17px 18px;font-size:17px;font-weight:900;line-height:1.6;
+  text-align:center;box-shadow:var(--shadow);letter-spacing:.5px;
+}
+
 /* 内容区块 */
 .ps-block{
   margin-top:15px;background:#fff;
