@@ -66,8 +66,12 @@ function buildVars(syn, prof, input) {
   if (input.zodiac) v.zodiac = input.zodiac.data.cn;
   if (input.bazi) v.dayMaster = input.bazi.dayMaster.cn + input.bazi.dayMaster.elementCn;
 
-  // 特质极值
-  const sorted = [...prof.axisDetails].sort((a, b) => Math.abs(b.val - 50) - Math.abs(a.val - 50));
+  // 特质极值（跳过中间档）。pole 为「居中」的轴放进文案会产生
+  // 「求新好奇、居中」这种废句子 —— min-05 模板整条就是
+  // {topTrait}、{secondTrait}，一旦 secondTrait 是「居中」整条就废了。
+  const sorted = [...prof.axisDetails]
+    .filter(d => d.band !== 'mid')
+    .sort((a, b) => Math.abs(b.val - 50) - Math.abs(a.val - 50));
   if (sorted[0]) {
     v.topTrait = sorted[0].pole;
     v.topTraitVal = sorted[0].val;

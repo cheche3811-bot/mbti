@@ -443,6 +443,37 @@ function matchArchetype(vector) {
  *  看两个体系在哪里打架，然后把「打架」本身命名成一个原型。
  * ============================================================ */
 
+/* ============================================================
+ *  反差轴文案
+ *
+ *  当两个体系在某一轴上给出相反答案时，最值得说的不是
+ *  「某条轴偏高」，而是「反差轴的两端你都能用」。
+ *  平均向量会把反差抹平，导致优势/建议退化成单薄的单轴描述，
+ *  所以有分歧时直接按分歧轴取这里的文案。
+ * ============================================================ */
+const CONTRAST_AXIS_TEXT = {
+  extraversion: {
+    strength: '能安静下来专注，也能在关键时刻站出来——节奏由你说了算',
+    advice: '不必在「内向」和「外放」里二选一，两个都是你，只是场合不同'
+  },
+  openness: {
+    strength: '既有天马行空的想法，也留着一只脚踩在地上',
+    advice: '想法多的那面可以尽情飞，但别让务实的那面把它全盘否定'
+  },
+  conscientiousness: {
+    strength: '想松的时候能松，想紧的时候能紧，弹性比一味自律更强',
+    advice: '别用「自律」那面去责怪「随性」那面，两者配合着来才不累'
+  },
+  agreeableness: {
+    strength: '有边界感，也有温度——敢说真话，也照顾得到别人的感受',
+    advice: '直率是你的保护色，偶尔也让体贴那面出来透透气'
+  },
+  stability: {
+    strength: '情绪丰富但不失控，感知得到波动，也稳得住自己',
+    advice: '敏感不是缺点，它让你比钝感的人多一层雷达'
+  }
+};
+
 /**
  * 按最大分歧轴匹配反差型原型
  *
@@ -537,24 +568,45 @@ function buildProfile(syn) {
   const workStyle = narrativeSource.slice(0, 2).map(d => d.work);
   const socialStyle = narrativeSource.slice(0, 2).map(d => d.social);
 
-  // 优势取高档轴 + 低档轴中本身是优势的表述
-  const strengths = axisDetails
-    .filter(d => d.band !== 'mid')
-    .sort((a, b) => Math.abs(b.val - 50) - Math.abs(a.val - 50))
-    .slice(0, 4)
-    .map(d => ({ axis: d.axis, text: d.strength }));
+  // 优势取高档轴 + 低档轴中本身是优势的表述。
+  // ⚠️ 有分歧时换反差向文案：平均向量把两个极端抵消（INFP 32 与白羊 78 → 55），
+  // 照它取优势只会剩「开放性」一条，跟用户最鲜明的反差毫无关系。
+  let strengths, advices;
+  if (syn.conflicts && syn.conflicts.length) {
+    const t = syn.conflicts[0];
+    const CT = CONTRAST_AXIS_TEXT[t.axis.key];
+    if (CT) {
+      strengths = [{ axis: t.axis, text: CT.strength }];
+      advices = [{ axis: t.axis, text: CT.advice }];
+      // 反差优势放最前，再从平均向量补 1-2 条非分歧轴的优势/建议，
+      // 避免只有一条显得单薄（三维全填时尤其需要内容量）。
+      const rest = axisDetails
+        .filter(d => d.band !== 'mid' && d.axis.key !== t.axis.key)
+        .sort((a, b) => Math.abs(b.val - 50) - Math.abs(a.val - 50));
+      rest.slice(0, 2).forEach(d => strengths.push({ axis: d.axis, text: d.strength }));
+      rest.slice(0, 1).forEach(d => advices.push({ axis: d.axis, text: d.advice }));
+    }
+  }
 
-  const advices = axisDetails
-    .filter(d => d.band !== 'mid')
-    .sort((a, b) => Math.abs(b.val - 50) - Math.abs(a.val - 50))
-    .slice(0, 3)
-    .map(d => ({ axis: d.axis, text: d.advice }));
+  if (!strengths) {
+    strengths = axisDetails
+      .filter(d => d.band !== 'mid')
+      .sort((a, b) => Math.abs(b.val - 50) - Math.abs(a.val - 50))
+      .slice(0, 4)
+      .map(d => ({ axis: d.axis, text: d.strength }));
 
-  // 全中间档时也要给出建议
-  if (!advices.length) {
-    const top = [...axisDetails].sort((a, b) => Math.abs(b.val - 50) - Math.abs(a.val - 50)).slice(0, 2);
-    top.forEach(d => advices.push({ axis: d.axis, text: d.advice }));
-    top.forEach(d => strengths.push({ axis: d.axis, text: d.strength }));
+    advices = axisDetails
+      .filter(d => d.band !== 'mid')
+      .sort((a, b) => Math.abs(b.val - 50) - Math.abs(a.val - 50))
+      .slice(0, 3)
+      .map(d => ({ axis: d.axis, text: d.advice }));
+
+    // 全中间档时也要给出建议
+    if (!advices.length) {
+      const top = [...axisDetails].sort((a, b) => Math.abs(b.val - 50) - Math.abs(a.val - 50)).slice(0, 2);
+      top.forEach(d => advices.push({ axis: d.axis, text: d.advice }));
+      top.forEach(d => strengths.push({ axis: d.axis, text: d.strength }));
+    }
   }
 
   // ---------- 一致性洞察 ----------
@@ -606,7 +658,9 @@ function buildProfile(syn) {
   let oneLinerShort;
   if (syn.conflicts && syn.conflicts.length) {
     const t = syn.conflicts[0];
-    oneLinerShort = `${t.axis.cn}上 ${t.gap} 分的反差`;
+    // 之前是「外向性上 46 分的反差」——像检验报告片段，断在半句不像人话。
+    // 「上差 46 分，两面都是我」成句、有态度，且把「反差」落回「人」身上。
+    oneLinerShort = `${t.axis.cn}上差 ${t.gap} 分，两面都是我`;
   } else if (poles.length >= 2) {
     oneLinerShort = `${poles[0]}、${poles[1]}，就是我`;
   } else if (poles.length === 1) {
