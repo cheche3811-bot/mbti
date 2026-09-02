@@ -774,6 +774,15 @@ kbd{
 .ec-go{font-size:13.5px;font-weight:900;color:var(--ink)}
 .ec-second .ec-go{color:var(--ink)}
 
+/* 双人契合入口（独立横条，第三个功能） */
+.ec-pair{
+  margin-top:16px;flex-direction:row;align-items:center;gap:14px;flex-wrap:wrap;
+  background:linear-gradient(160deg,#FFE0EC,#FFFFFF 60%);
+}
+.ec-pair .ec-icon{font-size:30px}
+.ec-pair .ec-desc{flex:1}
+.ec-pair .ec-meta{flex:none}
+
 /* ---------- 依据徽章 ---------- */
 .ev-badge{
   flex:none;
@@ -1515,3 +1524,62 @@ kbd{
 .bd-details ul,
 .bd-details .bd-foot{padding-left:22px;padding-right:22px}
 .bd-details .bd-foot{padding-bottom:22px}
+
+/* ============================================================
+   双人契合度 · 结果页
+   ============================================================ */
+.pair-hero{
+  background:linear-gradient(150deg,var(--tint-yellow),#FFE4EE 55%,var(--tint-mint));
+  border:3.5px solid var(--line);border-radius:32px;
+  padding:30px 24px;text-align:center;box-shadow:var(--shadow-lg);
+  position:relative;overflow:hidden;
+}
+.pair-hero::before{
+  content:'';position:absolute;inset:0;
+  background-image:radial-gradient(rgba(255,255,255,.5) 1.6px,transparent 1.6px);
+  background-size:20px 20px;pointer-events:none;
+}
+.ph-faces{display:flex;justify-content:center;align-items:center;gap:16px;margin-bottom:8px;position:relative;z-index:1}
+.ph-face{
+  width:64px;height:64px;display:grid;place-items:center;
+  background:#fff;border:3px solid var(--line);border-radius:50%;
+  box-shadow:var(--shadow-sm);
+}
+.ph-heart{font-size:26px;line-height:1}
+.ph-caption{font-size:13px;font-weight:800;color:#5A4E63;margin-bottom:16px;position:relative;z-index:1}
+.ph-ring{position:relative;width:140px;height:140px;margin:0 auto;z-index:1}
+.ph-ring svg{width:100%;height:100%;transform:rotate(-90deg)}
+.pr-bg{fill:none;stroke:#fff;stroke-width:12}
+.pr-fg{fill:none;stroke:var(--sc);stroke-width:12;stroke-linecap:round}
+.pr-num{position:absolute;inset:0;display:grid;place-items:center}
+.pr-num b{font-size:34px;font-weight:900;line-height:1}
+.pr-num i{font-size:14px;font-style:normal;font-weight:700;color:#6B6076;margin-left:2px}
+.ph-level{margin-top:14px;font-size:22px;font-weight:900;position:relative;z-index:1}
+.ph-desc{margin-top:10px;font-size:13.5px;line-height:1.8;color:#463C50;font-weight:600;position:relative;z-index:1}
+
+.pair-advice{display:flex;flex-direction:column;gap:11px}
+.pa-item{
+  display:flex;align-items:flex-start;gap:12px;
+  background:#fff;border:2.5px solid var(--line);border-radius:var(--r-sm);
+  padding:14px 16px;box-shadow:var(--shadow-sm);
+}
+.pa-idx{
+  flex:none;width:26px;height:26px;display:grid;place-items:center;
+  background:var(--yellow);border:2px solid var(--line);border-radius:50%;
+  font-size:12px;font-weight:900;box-shadow:2px 2px 0 var(--line);
+}
+.pa-text{font-size:13.5px;line-height:1.8;color:#463C50;font-weight:600;margin:0}
+
+.pair-self{display:flex;align-items:center;gap:14px;margin-bottom:14px}
+.pair-self .ps-arc-face{flex:none}
+
+.pair-best{display:flex;flex-direction:column;gap:11px}
+.pb-item{
+  display:flex;align-items:center;gap:14px;
+  background:#fff;border:2.5px solid var(--line);border-radius:var(--r-sm);
+  padding:13px 16px;box-shadow:var(--shadow-sm);
+}
+.pb-face{flex:none;display:grid;place-items:center}
+.pb-info{display:flex;flex-direction:column;gap:2px}
+.pb-info b{font-size:14.5px;font-weight:900}
+.pb-info i{font-size:12.5px;font-style:normal;color:var(--ink-2);font-weight:700}

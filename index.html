@@ -75,6 +75,14 @@
       </button>
     </div>
 
+    <button class="entry-card ec-pair" id="btn-pair" data-page-node-id="btn-pair-entry">
+      <span class="ec-icon" data-page-node-id="ec-pair-icon">💞</span>
+      <span class="ec-title" data-page-node-id="ec-pair-title">双人契合度</span>
+      <span class="ec-desc" data-page-node-id="ec-pair-desc">输入你和 TA 的星座，看看你们的人格合不合拍</span>
+      <span class="ec-meta" data-page-node-id="ec-pair-meta">约 30 秒 · 星座必填</span>
+      <span class="ec-go" data-page-node-id="ec-pair-go">测测契合度 →</span>
+    </button>
+
     <div class="home-stats" data-page-node-id="wQU7Ux6Sz1p8GvDyF48pAq">
       <div class="hs" data-page-node-id="kCv9629GlALfm8O2k6Dv0H"><b data-page-node-id="tpLj8eBtqXmMiqqXznYQIS">3</b><i data-page-node-id="ry9rYiVPeJITzaHg7gUGoN">个维度</i></div>
       <div class="hs-line" data-page-node-id="gLxvqBTvWMAxoeLRgDaCtG"></div>
@@ -259,6 +267,70 @@
   <div class="result-wrap" id="multi-wrap" data-page-node-id="tGEuKYULq3ymJa8QBSh7AP"><!-- JS 注入 --></div>
 </section>
 
+<!-- ==================== 双人契合度 · 填写页 ==================== -->
+<section class="screen" id="screen-pair" data-page-node-id="screen-pair-node">
+  <div class="form-wrap" data-page-node-id="pair-form-wrap">
+    <header class="form-head" data-page-node-id="pair-form-head">
+      <button class="icon-btn" id="btn-pair-back" title="返回" data-page-node-id="btn-pair-back-n">←</button>
+      <div class="form-head-txt" data-page-node-id="pair-form-head-txt">
+        <h2 data-page-node-id="pair-form-h2">双人契合度</h2>
+        <p data-page-node-id="pair-form-p">填你和 TA 的<b data-page-node-id="pair-form-b">星座</b>（必填），MBTI 和生日选填，填得越全越准</p>
+      </div>
+    </header>
+
+    <div class="fs-card" data-page-node-id="pair-card-a">
+      <div class="fs-head" data-page-node-id="pair-head-a">
+        <span class="fs-num" data-page-node-id="pair-num-a">A</span>
+        <div class="fs-titles" data-page-node-id="pair-titles-a"><h3 data-page-node-id="pair-h3-a">你</h3></div>
+      </div>
+      <div class="fs-body" data-page-node-id="pair-body-a">
+        <p class="fs-tip" data-page-node-id="pair-tip-a">选你的星座（必填）</p>
+        <div class="zo-grid" id="zo-grid-a" data-page-node-id="zo-grid-a-node"><!-- JS 注入 --></div>
+        <div class="fs-sub" data-page-node-id="pair-mbti-a-wrap">
+          <label class="fs-label" data-page-node-id="pair-mbti-a-label">你的 MBTI（选填）</label>
+          <div class="mp-row" id="mp-grid-a" data-page-node-id="mp-grid-a-node"><!-- JS 注入 --></div>
+        </div>
+        <div class="fs-sub" data-page-node-id="pair-birth-a-wrap">
+          <label class="fs-label" for="in-birth-a" data-page-node-id="pair-birth-a-label">你的生日（选填，自动算八字）</label>
+          <input type="date" class="fs-input" id="in-birth-a" min="1900-01-01" max="2026-12-31" data-page-node-id="in-birth-a-node">
+        </div>
+      </div>
+    </div>
+
+    <div class="fs-card" data-page-node-id="pair-card-b">
+      <div class="fs-head" data-page-node-id="pair-head-b">
+        <span class="fs-num" data-page-node-id="pair-num-b">B</span>
+        <div class="fs-titles" data-page-node-id="pair-titles-b"><h3 data-page-node-id="pair-h3-b">TA</h3></div>
+      </div>
+      <div class="fs-body" data-page-node-id="pair-body-b">
+        <p class="fs-tip" data-page-node-id="pair-tip-b">选 TA 的星座（必填）</p>
+        <div class="zo-grid" id="zo-grid-b" data-page-node-id="zo-grid-b-node"><!-- JS 注入 --></div>
+        <div class="fs-sub" data-page-node-id="pair-mbti-b-wrap">
+          <label class="fs-label" data-page-node-id="pair-mbti-b-label">TA 的 MBTI（选填）</label>
+          <div class="mp-row" id="mp-grid-b" data-page-node-id="mp-grid-b-node"><!-- JS 注入 --></div>
+        </div>
+        <div class="fs-sub" data-page-node-id="pair-birth-b-wrap">
+          <label class="fs-label" for="in-birth-b" data-page-node-id="pair-birth-b-label">TA 的生日（选填，自动算八字）</label>
+          <input type="date" class="fs-input" id="in-birth-b" min="1900-01-01" max="2026-12-31" data-page-node-id="in-birth-b-node">
+        </div>
+      </div>
+    </div>
+
+    <div class="form-foot" data-page-node-id="pair-form-foot">
+      <div class="form-status" id="pair-status" data-page-node-id="pair-status-node">先选两个人的星座</div>
+      <button class="btn-main" id="btn-pair-analyze" disabled data-page-node-id="btn-pair-analyze-node">
+        看契合度 <span class="arrow" data-page-node-id="pair-arrow">→</span>
+      </button>
+      <p class="form-note" data-page-node-id="pair-form-note">🔒 全程本地计算，信息不上传</p>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== 结果页（双人契合） ==================== -->
+<section class="screen" id="screen-pair-result" data-page-node-id="screen-pair-result-node">
+  <div class="result-wrap" id="pair-result-wrap" data-page-node-id="pair-result-wrap-node"><!-- JS 注入 --></div>
+</section>
+
 <script src="assets/js/data-bundle.js"></script>
 <script src="assets/js/avatars.js"></script>
 <script src="assets/js/animals.js"></script>
@@ -272,6 +344,8 @@
 <script src="assets/js/share-card-v2.js"></script>
 <script src="assets/js/app.js"></script>
 <script src="assets/js/multi.js"></script>
+<script src="assets/js/compatibility.js"></script>
+<script src="assets/js/pair.js"></script>
 <script src="assets/js/share-url.js"></script>
 </body>
 </html>

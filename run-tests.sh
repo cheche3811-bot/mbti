@@ -39,6 +39,7 @@ SUITES=(
   test-share-layout
   test-card-v2-layout
   test-share-url
+  test-compatibility
 )
 
 total=0

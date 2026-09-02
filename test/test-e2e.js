@@ -105,7 +105,8 @@ const src = load('data-bundle.js') + load('avatars.js') + load('animals.js')
           + load('questions.js') + load('types.js') + load('astro.js')
           + load('synthesis.js') + load('share-engine.js')
           + load('share.js') + load('share-summary.js') + load('share-card-v2.js')
-          + load('app.js') + load('multi.js');
+          + load('app.js') + load('multi.js')
+          + load('compatibility.js') + load('pair.js');
 
 let api;
 console.log('\n========== 1. 全脚本加载与初始化 ==========');
@@ -117,9 +118,10 @@ try {
     animalAvatar, buildShareSection, renderCopyCards, generateCopyCandidates,
     calcBadges, buildVars, pickTheme, shareCopyStats, SHARE_COPY_DATA,
     AVATAR_MBTI, AVATAR_ZODIAC, AVATAR_STEM, AVATAR_ARCHETYPE,
-    buildZodiacPicker, renderDimBody, TYPES, ZODIAC_DATA, SOURCES_DATA, state
+    buildZodiacPicker, renderDimBody, TYPES, ZODIAC_DATA, SOURCES_DATA, state,
+    coupleMatch, findBestMatch, pairState, renderPairResult, COMPAT_DATA
   };`)();
-  ok(true, '13 个脚本按 index.html 顺序加载无异常');
+  ok(true, '15 个脚本按 index.html 顺序加载无异常');
 } catch (e) {
   ok(false, '加载失败: ' + e.message);
   console.log(e.stack.split('\n').slice(0,4).join('\n'));
@@ -359,6 +361,34 @@ const noTitle = allSrc.filter(id => !api.SOURCES_DATA.sources[id].title);
 ok(noTitle.length === 0, '所有文献均有标题');
 const noNote = allSrc.filter(id => !api.SOURCES_DATA.sources[id].note);
 ok(noNote.length === 0, '所有文献均有说明备注');
+
+console.log('\n========== 11. 双人契合度 ==========');
+// 表单构建：两套星座 + MBTI 选择器
+ok((registry['zo-grid-a']._html.match(/data-key=/g)||[]).length === 12, 'A 星座选择器 12 项');
+ok((registry['zo-grid-b']._html.match(/data-key=/g)||[]).length === 12, 'B 星座选择器 12 项');
+ok((registry['mp-grid-a']._html.match(/data-code=/g)||[]).length === 16, 'A MBTI 选择器 16 项');
+ok((registry['mp-grid-b']._html.match(/data-code=/g)||[]).length === 16, 'B MBTI 选择器 16 项');
+
+// 契合度结果渲染
+const PA = { mbti: null, zodiac: api.getZodiacSign(4, 5), bazi: null };
+const PB = { mbti: { type: 'ENFJ', identity: 'A' }, zodiac: api.getZodiacSign(8, 5), bazi: null };
+const pm = api.coupleMatch(PA, PB);
+ok(pm && pm.score >= 0 && pm.level.label, 'coupleMatch 返回分数+等级');
+api.pairState.result = { match: pm, inputA: PA, inputB: PB };
+api.pairState.a.zodiacKey = 'aries';
+api.pairState.b.zodiacKey = 'leo';
+api.renderPairResult();
+const ph = registry['pair-result-wrap']._html;
+ok(ph.includes('pair-hero'), '契合度大卡已渲染');
+ok(ph.includes('pr-num'), '契合度环形图已渲染');
+ok(ph.includes('相处建议'), '相处建议区已渲染');
+ok((ph.match(/pa-item/g)||[]).length >= 3, '建议 ≥3 条');
+ok(ph.includes('你的人格画像'), '自己画像区已渲染');
+ok(ph.includes('理想型'), '理想型推荐区已渲染');
+ok((ph.match(/pb-item/g)||[]).length === 3, '理想型 top 3');
+ok(!ph.includes('undefined'), '双人结果无 undefined 残留');
+// 理想型应含 MBTI 头像（svg）
+ok((ph.match(/<svg/g)||[]).length >= 3, '结果页含 SVG 头像');
 
 console.log('\n' + '='.repeat(48));
 console.log('  通过 ' + pass + ' 项，失败 ' + fail + ' 项');

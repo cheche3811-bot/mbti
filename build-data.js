@@ -23,6 +23,7 @@ const FILES = [
   { file: 'bazi.json',    varName: 'BAZI_DATA' },
   { file: 'profile.json', varName: 'PROFILE_DATA' },
   { file: 'share-copy.json', varName: 'SHARE_COPY_DATA' },
+  { file: 'compatibility.json', varName: 'COMPAT_DATA' },
   { file: 'sources.json', varName: 'SOURCES_DATA' }
 ];
 
